@@ -11,7 +11,7 @@
             --primary: #e74c3c;
             --primary-glow: #ff3b30;
             --dark: #0c1022;
-            --glass: rgba(15, 20, 40, 0.7);
+            --glass: rgba(15, 20, 40, 0.75);
             --border: rgba(231, 76, 60, 0.25);
         }
 
@@ -42,7 +42,7 @@
             transform: translateX(-50%);
             width: 95%;
             max-width: 1500px;
-            padding: 20px 40px;
+            padding: 18px 40px;
             background: var(--glass);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
@@ -116,7 +116,7 @@
         .slide-menu.active { right: 0; }
 
         .menu-section-title {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             color: rgba(255,255,255,0.4);
             margin: 25px 0 10px;
@@ -155,10 +155,6 @@
         .slide-menu.active .menu-item:nth-child(4) { animation-delay: 0.2s; }
         .slide-menu.active .menu-item:nth-child(5) { animation-delay: 0.25s; }
         .slide-menu.active .menu-item:nth-child(6) { animation-delay: 0.3s; }
-        .slide-menu.active .menu-item:nth-child(7) { animation-delay: 0.35s; }
-        .slide-menu.active .menu-item:nth-child(8) { animation-delay: 0.4s; }
-        .slide-menu.active .menu-item:nth-child(9) { animation-delay: 0.45s; }
-        .slide-menu.active .menu-item:nth-child(10) { animation-delay: 0.5s; }
 
         @keyframes slideIn {
             to { opacity: 1; transform: translateX(0); }
@@ -190,6 +186,7 @@
             font-size: 16px;
             transition: all 0.3s ease;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .social-icon:hover {
@@ -205,6 +202,29 @@
             justify-content: center;
             text-align: center;
             padding: 0 5%;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background-image: url('https://imgur.com/a/ZjTVInJ');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
@@ -215,19 +235,19 @@
             -webkit-text-fill-color: transparent;
             letter-spacing: 4px;
             text-shadow: 0 0 60px rgba(231,76,60,0.5);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .hero p {
-            font-size: 28px;
-            margin-bottom: 50px;
+            font-size: 26px;
+            margin-bottom: 35px;
             opacity: 0.9;
             font-weight: 500;
         }
 
         .ip-btn {
-            padding: 22px 80px;
-            font-size: 32px;
+            padding: 20px 70px;
+            font-size: 30px;
             font-weight: 900;
             background: linear-gradient(45deg, var(--primary), #ff5e50);
             color: white;
@@ -246,13 +266,26 @@
             box-shadow: 0 25px 60px rgba(231,76,60,0.8);
         }
 
-        section { padding: 120px 8%; }
+        .ip-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.8s;
+        }
+
+        .ip-btn:hover::before { left: 100%; }
+
+        section { 
+            padding: 80px 8% 80px;
+        }
 
         .title {
-            font-size: 56px;
+            font-size: 52px;
             font-weight: 900;
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
             background: linear-gradient(120deg, #e74c3c, #ff8c7a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -261,7 +294,7 @@
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            gap: 35px;
         }
 
         .card {
@@ -269,7 +302,7 @@
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: 25px;
-            padding: 50px 35px;
+            padding: 45px 30px;
             text-align: center;
             transition: 0.4s;
         }
@@ -282,17 +315,17 @@
         .card i {
             font-size: 60px;
             color: var(--primary);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .card h3 {
             font-size: 24px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 700;
         }
 
         .card p {
-            font-size: 16px;
+            font-size: 15px;
             opacity: 0.8;
             line-height: 1.6;
         }
@@ -301,23 +334,23 @@
             background: var(--glass);
             backdrop-filter: blur(20px);
             border-radius: 30px;
-            padding: 60px 50px;
+            padding: 55px 45px;
             margin: 0 auto;
             max-width: 1200px;
             border: 1px solid var(--border);
         }
 
         .about-section h2 {
-            font-size: 56px;
+            font-size: 52px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             background: linear-gradient(120deg, #e74c3c, #ff8c7a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .about-section p {
-            font-size: 20px;
+            font-size: 18px;
             line-height: 1.8;
             text-align: center;
             opacity: 0.9;
@@ -325,12 +358,12 @@
 
         footer {
             background: #080a16;
-            padding: 80px 8% 50px;
+            padding: 60px 8% 40px;
             text-align: center;
         }
 
         footer p {
-            font-size: 16px;
+            font-size: 15px;
             color: #666;
         }
 
@@ -341,10 +374,10 @@
             transform: translateX(-50%);
             background: var(--primary);
             color: white;
-            padding: 18px 40px;
+            padding: 16px 35px;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 10000;
             opacity: 0;
@@ -359,6 +392,11 @@
             .ip-btn { font-size: 22px; padding: 18px 50px; }
             .title { font-size: 38px; }
             .slide-menu { width: 280px; }
+            .hero::before {
+                width: 350px;
+                height: 350px;
+                opacity: 0.05;
+            }
         }
     </style>
 </head>
@@ -368,7 +406,7 @@
 
     <header>
         <a href="index.html" class="logo">
-            <img src="https://via.placeholder.com/110x110/e74c3c/ffffff?text=FRP" alt="Fanatic RP">
+            <img src="https://i.imgur.com/I8hRq8J.png" alt="Fanatic RP">
             <span>FANATIC RP</span>
         </a>
 
@@ -399,9 +437,11 @@
     </div>
 
     <section class="hero" id="home">
-        <h1>FANATIC ROLE PLAY</h1>
-        <p>საქართველოს #1 SA-MP სერვერი • 2025</p>
-        <button class="ip-btn" onclick="copyIP()">185.189.255.97:2561</button>
+        <div class="hero-content">
+            <h1>FANATIC ROLE PLAY</h1>
+            <p>საქართველოს #1 SA-MP სერვერი • 2025</p>
+            <button class="ip-btn" onclick="copyIP()">185.189.255.97:2561</button>
+        </div>
     </section>
 
     <section id="how">
@@ -466,11 +506,11 @@
 
         function downloadLauncher(type) {
             if (type === 'pc') {
-                alert('PC ლაუნჩერის ჩამოტვირთვა დაიწყება...\n\nშეცვალეთ ეს ლინკით: YOUR_PC_LAUNCHER_DOWNLOAD_LINK');
-                // window.location.href = 'YOUR_PC_LAUNCHER_DOWNLOAD_LINK';
+                // Replace with your actual download link
+                window.location.href = 'YOUR_PC_LAUNCHER_DOWNLOAD_LINK';
             } else {
-                alert('Mobile ლაუნჩერის ჩამოტვირთვა დაიწყება...\n\nშეცვალეთ ეს ლინკით: YOUR_MOBILE_LAUNCHER_DOWNLOAD_LINK');
-                // window.location.href = 'YOUR_MOBILE_LAUNCHER_DOWNLOAD_LINK';
+                // Replace with your actual download link
+                window.location.href = 'YOUR_MOBILE_LAUNCHER_DOWNLOAD_LINK';
             }
         }
 
