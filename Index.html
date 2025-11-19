@@ -3,91 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fanatic Role Play • საქართველოს #1 SA-MP სერვერი</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Fanatic Role Play • საქართველოს #1 SA-MP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Noto+Sans+Georgian:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #e74c3c;
-            --primary-dark: #c0392b;
-            --dark: #0f1419;
-            --darker: #0a0e27;
-            --light: #ecf0f1;
+            --primary-glow: #ff3b30;
+            --dark: #0c0f1a;
+            --glass: rgba(15, 20, 39, 0.65);
+            --border: rgba(231, 76, 60, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Noto Sans Georgian', sans-serif;
-            background: var(--darker);
-            color: var(--light);
-            line-height: 1.6;
+            background: #0a0d1a;
+            color: #fff;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Animated Background */
-        .bg-animation {
+        /* Particles Background */
+        #particles-js {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-            z-index: -2;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0d1a 0%, #1a1f3a 100%);
+            z-index: -1;
         }
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 70%, rgba(231,76,60,0.15) 0%, transparent 60%);
-            animation: float 20s ease-in-out infinite;
-        }
-        @keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(100px,-100px); } }
 
         /* Header */
         header {
             position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 20px 5%;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1400px;
+            padding: 18px 40px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 60px;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            transition: 0.4s;
-            background: rgba(10,14,39,0.8);
-            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
         }
-        header.scrolled { background: rgba(10,14,39,0.95); padding: 15px 5%; }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
             font-size: 28px;
             font-weight: 900;
-            color: white;
             text-decoration: none;
+            color: white;
         }
-        .logo img { width: 55px; height: 55px; border-radius: 12px; }
 
-        nav ul {
-            display: flex;
-            gap: 40px;
-            list-style: none;
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px rgba(231,76,60,0.6);
         }
+
         nav a {
             color: white;
             text-decoration: none;
+            margin: 0 20px;
             font-weight: 600;
             font-size: 17px;
-            transition: 0.3s;
+            position: relative;
+            transition: 0.4s;
         }
-        nav a:hover { color: var(--primary); }
 
-        .mobile-menu-btn {
-            display: none;
-            font-size: 28px;
-            color: white;
-            cursor: pointer;
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: 0.4s;
+            border-radius: 3px;
         }
+
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--primary); }
 
         /* Hero */
         .hero {
@@ -99,244 +106,255 @@
             text-align: center;
             position: relative;
         }
-        .hero::before {
+
+        .hero h1 {
+            font-size: 110px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #fff, var(--primary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 5px;
+            text-shadow: 0 0 60px rgba(231,76,60,0.5);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 32px;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        /* IP Button - uiverse style */
+        .ip-btn {
+            padding: 22px 100px;
+            font-size: 38px;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), #ff6b5a);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(231,76,60,0.5);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .ip-btn::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://via.placeholder.com/1920x1080/0f1419/ffffff?text=Fanatic+RP+Hero') center/cover no-repeat;
-            filter: brightness(0.45);
+            top: 0; left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.7s;
         }
-        .hero h1 {
-            font-size: 90px;
-            font-weight: 900;
-            letter-spacing: 4px;
-            text-shadow: 0 0 40px rgba(231,76,60,0.8);
-            margin-bottom: 20px;
-            z-index: 1;
-        }
-        .hero p {
-            font-size: 28px;
-            margin-bottom: 40px;
-            z-index: 1;
-        }
-        .ip-box {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            padding: 25px 90px;
-            border-radius: 60px;
-            font-size: 36px;
-            font-weight: 800;
-            box-shadow: 0 15px 50px rgba(231,76,60,0.6);
-            cursor: pointer;
-            transition: 0.4s;
-            z-index: 1;
-        }
-        .ip-box:hover { transform: scale(1.08); box-shadow: 0 20px 70px rgba(231,76,60,0.8); }
 
-        /* Social Bar */
-        .social-bar {
+        .ip-btn:hover::before { left: 100%; }
+        .ip-btn:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(231,76,60,0.7);
+        }
+
+        /* Social Floating */
+        .floating-social {
             position: fixed;
             right: 30px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             z-index: 999;
-        }
-        .social-bar a {
-            width: 55px;
-            height: 55px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
+       . }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 24px;
-            transition: 0.4s;
+            font-size: 26px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
-        .social-bar a:hover {
+
+        .social-icon:hover {
             background: var(--primary);
-            transform: translateY(-5px) scale(1.15);
+            transform: translateY(-8px) scale(1.15);
+            box-shadow: 0 0 30px rgba(231,76,60,0.8);
         }
 
         /* Sections */
-        section { padding: 120px 8%; position: relative; }
+        section { padding: 140px 8%; }
 
-        .section-title {
-            font-size: 56px;
+        .title {
+            font-size: 68px;
             font-weight: 900;
             text-align: center;
-            margin-bottom: 80px;
-            background: linear-gradient(90deg, #e74c3c, #3498db);
+            margin-bottom: 100px;
+            background: linear-gradient(120deg, #e74c3c, #ff8c7a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* How to Start */
-        .steps {
+        .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 40px;
         }
-        .step {
-            background: rgba(255,255,255,0.06);
-            border-radius: 24px;
-            padding: 40px;
-            text-align: center;
-            transition: 0.4s;
-            border: 1px solid rgba(231,76,60,0.2);
-        }
-        .step:hover { transform: translateY(-20px); background: rgba(231,76,60,0.15); }
-        .step i {
-            font-size: 60px;
-            color: var(--primary);
-            margin-bottom: 25px;
-        }
-        .step h3 { font-size: 26px; margin-bottom: 20px; }
 
-        /* About */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 50px 30px;
+            text-align: center;
+            transition: 0.5s;
+            position: relative;
+            overflow: hidden;
         }
-        .about-text { font-size: 20px; line-height: 2; }
-        .about-img {
-            width: 100%;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--primary), #ff6b5a);
         }
+
+        .card:hover {
+            transform: translateY(-25px);
+            box-shadow: 0 30px 80px rgba(231,76,60,0.3);
+        }
+
+        .card i {
+            font-size: 70px;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .card h3 { font-size: 28px; margin-bottom: 20px; }
 
         /* Footer */
         footer {
-            background: #080c1f;
-            padding: 80px 8% 40px;
+            background: #080a14;
+            padding: 100px 8% 50px;
             text-align: center;
         }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
-            margin: 40px 0;
-        }
+
         .footer-links a {
-            color: #95a5a6;
-            text-decoration: none;
+            color: #aaa;
+            margin: 0 25px;
             font-size: 18px;
+            text-decoration: none;
             transition: 0.3s;
         }
+
         .footer-links a:hover { color: var(--primary); }
 
-        /* Responsive */
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .hero h1 { font-size: 70px; }
             .hero p { font-size: 24px; }
-            .about-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) {
+            .ip-btn { font-size: 28px; padding: 18px 60px; }
+            header { padding: 15px 20px; border-radius: 40px; }
             nav { display: none; }
-            .mobile-menu-btn { display: block; }
-            .hero h1 { font-size: 56px; }
-            .ip-box { font-size: 28px; padding: 20px 60px; }
-            .social-bar { right: 15px; gap: 15px; }
-            .social-bar a { width: 48px; height: 48px; font-size: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-animation"></div>
+    <div id="particles-js"></div>
 
-    <!-- Social Sidebar -->
-    <div class="social-bar">
-        <a href="https://discord.gg/uasS77WA" target="_blank"><i class="fab fa-discord"></i></a>
-        <a href="https://www.youtube.com/@tormetitormeti2" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@fanaticroleplay777" target="_blank"><i class="fab fa-tiktok"></i></a>
-        <a href="https://www.facebook.com/groups/687009050835555/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <!-- Floating Social -->
+    <div class="floating-social">
+        <a href="https://discord.gg/uasS77WA" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/@tormetitormeti2" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@fanaticroleplay777" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/groups/687009050835555/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
     </div>
 
-    <header id="header">
+    <header>
         <a href="#" class="logo">
-            <img src="https://via.placeholder.com/80x80/e74c3c/ffffff?text=FRP" alt="Fanatic RP">
+            <img src="https://via.placeholder.com/120x120/e74c3c/ffffff?text=FRP" alt="Fanatic RP">
             <span>FANATIC RP</span>
         </a>
         <nav>
-            <ul>
-                <li><a href="#home">მთავარი</a></li>
-                <li><a href="#howto">თამაშის დაწყება</a></li>
-                <li><a href="#about">ჩვენს შესახებ</a></li>
-            </ul>
+            <a href="#home">მთავარი</a>
+            <a href="#how">თამაში</a>
+            <a href="#about">შესახებ</a>
         </nav>
-        <div class="mobile-menu-btn">☰</div>
     </header>
 
     <section class="hero" id="home">
         <h1>FANATIC ROLE PLAY</h1>
-        <p>საქართველოს #1 SA-MP პროექტი 2025</p>
-        <div class="ip-box" onclick="navigator.clipboard.writeText('185.189.255.97:2561')">
+        <p>საქართველოს #1 SA-MP სერვერი • 2025</p>
+        <button class="ip-btn" onclick="copyIP()">
             185.189.255.97:2561
-        </div>
+        </button>
     </section>
 
-    <section id="howto">
-        <h2 class="section-title">როგორ დავიწყოთ თამაში?</h2>
-        <div class="steps">
-            <div class="step">
+    <section id="how">
+        <h2 class="title">როგორ დავიწყოთ?</h2>
+        <div class="cards">
+            <div class="card">
                 <i class="fas fa-download"></i>
-                <h3>ნაბიჯი 1</h3>
-                <p>გადმოწერე და დააინსტალირე ჩვენი ოფიციალური ლაუნჩერი</p>
+                <h3>გადმოწერა</h3>
+                <p>ჩამოტვირთე ოფიციალური ლაუნჩერი ერთი კლიკით</p>
             </div>
-            <div class="step">
-                <i class="fas fa-cogs"></i>
-                <h3>ნაბიჯი 2</h3>
-                <p>ლაუნჩერის მეშვეობით დააყენე ყველა საჭირო ფაილი ერთი კლიკით</p>
+            <div class="card">
+                <i class="fas fa-wrench"></i>
+                <h3>ინსტალაცია</h3>
+                <p>ლაუნჩერი თავად დააყენებს ყველა ფაილს</p>
             </div>
-            <div class="step">
-                <i class="fas fa-gamepad"></i>
-                <h3>ნაბიჯი 3</h3>
-                <p>მიუთითე შენი სახელი, დააჭირე „თამაშს“ და შემოგვიერთდი!</p>
+            <div class="card">
+                <i class="fas fa-play"></i>
+                <h3>თამაში!</h3>
+                <p>შეიყვანე სახელი და შემოგვიერთდი სერვერზე</p>
             </div>
-        </div>
-    </section>
-
-    <section id="about">
-        <h2 class="section-title">ჩვენს შესახებ</h2>
-        <div class="about-grid">
-            <div class="about-text">
-                <p>Fanatic Role Play — ეს არის საქართველოს ყველაზე მასშტაბური და პროფესიონალური SA-MP პროექტი, რომელიც შეიქმნა 2025 წელს.</p>
-                <br>
-                <p>ჩვენ გთავაზობთ სრულიად უნიკალურ სამყაროს, სადაც ყველა მოთამაშეს შეუძლია გახდეს ის, ვინც სურს — პოლიციელი, კრიმინალი, ბიზნესმენი თუ უბრალოდ მოქალაქე.</p>
-                <br>
-                <p>აქ თამაში არ არის უბრალოდ დროის გართობა — ეს არის ცხოვრება მეორე სამყაროში!</p>
-            </div>
-            <img src="https://via.placeholder.com/600x400/e74c3c/ffffff?text=Fanatic+RP" alt="Fanatic Role Play" class="about-img">
         </div>
     </section>
 
     <footer>
         <div class="footer-links">
-            <a href="https://discord.gg/uasS77WA" target="_blank">Discord</a>
-            <a href="https://www.youtube.com/@tormetitormeti2" target="_blank">YouTube</a>
-            <a href="https://www.tiktok.com/@fanaticroleplay777" target="_blank">TikTok</a>
-            <a href="https://www.facebook.com/groups/687009050835555/" target="_blank">Facebook ჯგუფი</a>
+            <a href="https://discord.gg/uasS77WA">Discord</a>
+            <a href="https://www.youtube.com/@tormetitormeti2">YouTube</a>
+            <a href="https://www.tiktok.com/@fanaticroleplay777">TikTok</a>
+            <a href="https://www.facebook.com/groups/687009050835555/">Facebook</a>
         </div>
-        <p style="color:#95a5a6; margin-top: 40px;">© 2025 Fanatic Role Play • ყველა უფლება დაცულია</p>
+        <p style="margin-top: 50px; color: #555;">© 2025 Fanatic Role Play • ყველა უფლება დაცულია</p>
     </footer>
 
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80 },
+                "color": { "value": "#e74c3c" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#e74c3c", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "repulse" } }
+            }
         });
 
-        // IP copy notification
-        document.querySelector('.ip-box').addEventListener('click', function() {
-            alert('IP დაკოპირდა: 185.189.255.97:2561');
-        });
+        function copyIP() {
+            navigator.clipboard.writeText("185.189.255.97:2561");
+            alert("IP წარმატებით დაკოპირდა!");
+        }
     </script>
 </body>
 </html>
