@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fanatic Role Play • საქართველოს #1 SA-MP</title>
     
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.imgur.com/gTKapLF.png" type="image/png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
@@ -229,7 +232,7 @@
         .logo img {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
+            border-radius: 0; /* Removed corner rounds */
             border: 2.5px solid var(--primary);
             box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -369,7 +372,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 5% 80px;
+            padding: 120px 5% 40px; /* Reduced bottom padding to fix gaps */
             position: relative;
             overflow: hidden;
         }
@@ -415,7 +418,7 @@
         .hero-subtitle {
             font-size: clamp(16px, 4vw, 28px);
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 20px; /* Reduced margin to fix gaps */
             font-weight: 400;
             letter-spacing: 1px;
             opacity: 0.85;
@@ -436,6 +439,7 @@
             letter-spacing: 1px;
             box-shadow: 0 15px 50px rgba(231, 76, 60, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             font-family: 'Space Mono', monospace;
+            margin-bottom: 0; /* Ensure no gap below button */
         }
 
         .ip-btn:before {
@@ -621,11 +625,11 @@
         /* ======== RESPONSIVE ======== */
         @media (max-width: 1024px) {
             header { width: 90%; padding: 14px 30px; }
-            .logo span { display: none; }
+            /* Removed .logo span { display: none; } to keep name visible */
         }
 
         @media (max-width: 768px) {
-            .hero { padding: 100px 5% 60px; }
+            .hero { padding: 100px 5% 40px; } /* Adjusted for mobile */
             .cards { grid-template-columns: 1fr; }
             .hero-bg { width: 600px; height: 600px; opacity: 0.05; }
             section { padding: clamp(40px, 8vw, 70px) 5%; }
@@ -759,7 +763,7 @@
 
     <header>
         <a href="index.html" class="logo">
-            <img src="https://i.imgur.com/ZjTVInJ.png" alt="Fanatic RP">
+            <img src="https://i.imgur.com/gTKapLF.png" alt="Fanatic RP">
             <span>FANATIC RP</span>
         </a>
         <div class="burger" onclick="toggleMenu()">
@@ -802,7 +806,7 @@
             <div class="card">
                 <i class="fas fa-gamepad"></i>
                 <h3>უნიკალური თამაში</h3>
-                <p>განსხვავებული როლური თამაში საქართველოში.</p>
+                <p>განსხვავებული როლური რ თამაში საქართველოში.</p>
             </div>
             <div class="card">
                 <i class="fas fa-users"></i>
@@ -919,8 +923,8 @@
             }
         });
 
-        // Parallax effect on hero (note: .hero::before doesn't exist, so this might not do anything; add if needed)
-        gsap.to('.hero-bg', { // Changed to .hero-bg as a placeholder
+        // Parallax effect on hero
+        gsap.to('.hero-bg', {
             scrollTrigger: {
                 trigger: '.hero',
                 start: 'top top',
