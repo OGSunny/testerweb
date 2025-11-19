@@ -1,4 +1,3 @@
-<!-- forum.html -->
 <!DOCTYPE html>
 <html lang="ka">
 <head>
@@ -12,247 +11,439 @@
 
     <style>
         :root {
-            --primary: #27ae60;
-            --primary-light: #2ecc71;
-            --primary-dark: #1e8449;
-            --glass: rgba(21, 32, 43, 0.9);
-            --glass-light: rgba(21, 32, 43, 0.7);
-            --border: rgba(39, 174, 96, 0.3);
+            --primary: #e74c3c;
+            --primary-light: #ff6b57;
+            --bg-dark: #0f1419;
+            --bg-darker: #0a0d12;
+            --card-bg: #1a1f2e;
+            --border: rgba(231, 76, 60, 0.2);
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --neon-glow: 0 0 10px #27ae60, 0 0 20px #27ae60;
+            --text-secondary: rgba(255, 255, 255, 0.7);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background: #15202b; color: var(--text-primary); overflow-x: hidden; min-height: 100vh; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg-dark); color: var(--text-primary); overflow-x: hidden; min-height: 100vh; }
 
         /* HEADER */
-        header { position: fixed; top: 0; left: 0; width: 100%; padding: 15px 5%; background: rgba(21,32,43,0.98); border-bottom: 1px solid var(--border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-        .logo { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 800; color: white; text-decoration: none; letter-spacing: 1px; }
+        header { position: fixed; top: 0; left: 0; width: 100%; padding: 15px 5%; background: rgba(10,13,18,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; color: white; text-decoration: none; }
         .logo img { width: 40px; height: 40px; border-radius: 50%; transition: transform 0.3s; }
         .logo:hover img { transform: scale(1.1); }
-        .burger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
-        .burger span { width: 25px; height: 2px; background: white; border-radius: 2px; transition: 0.4s; }
-        .burger.active span:nth-child(1) { transform: rotate(45deg) translate(8px,8px); }
-        .burger.active span:nth-child(2) { opacity: 0; }
-        .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+        
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .user-badge { background: rgba(231,76,60,0.1); border: 1px solid var(--border); padding: 8px 15px; border-radius: 8px; font-size: 14px; font-weight: 600; }
+        .btn-logout { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.3s; color: white; text-decoration: none; }
+        .btn-logout:hover { background: var(--primary); border-color: var(--primary); }
 
-        .slide-menu { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: rgba(21,32,43,0.98); border-left: 1px solid var(--border); padding: 80px 25px 30px; transition: right 0.5s; z-index: 999; box-shadow: -10px 0 30px rgba(0,0,0,0.6); overflow-y: auto; }
-        .slide-menu.active { right: 0; }
-        .menu-section-title { font-size: 12px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin: 20px 0 10px; font-weight: 600; letter-spacing: 1px; }
-        .menu-item { padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; font-weight: 500; color: white; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 10px; border-radius: 8px; }
-        .menu-item i { font-size: 16px; color: var(--primary); width: 18px; }
-        .menu-item:hover { color: var(--primary); padding-left: 15px; background: rgba(39,174,96,0.08); }
-        .social-icons { display: flex; gap: 10px; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); flex-wrap: wrap; }
-        .social-icon { width: 40px; height: 40px; background: rgba(39,174,96,0.08); border: 1px solid rgba(39,174,96,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; transition: all 0.3s; text-decoration: none; }
-        .social-icon:hover { background: var(--primary); transform: translateY(-3px) scale(1.05); }
-        .team-member { padding: 10px 12px; font-size: 13px; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 8px; border-radius: 6px; background: rgba(39,174,96,0.04); margin-bottom: 6px; }
-        .team-member i { font-size: 14px; color: var(--primary); }
+        /* AUTH PAGES */
+        .auth-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 20px; }
+        .auth-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 40px; max-width: 450px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .auth-box h1 { font-size: 28px; margin-bottom: 10px; color: var(--primary); display: flex; align-items: center; gap: 12px; }
+        .auth-box p { color: var(--text-secondary); margin-bottom: 30px; font-size: 14px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+        .form-group input { width: 100%; padding: 14px 16px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: white; font-size: 15px; font-family: 'Montserrat', sans-serif; transition: all 0.3s; }
+        .form-group input:focus { outline: none; border-color: var(--primary); background: rgba(0,0,0,0.5); }
+        
+        .btn-primary { width: 100%; padding: 16px; background: var(--primary); border: none; border-radius: 10px; color: white; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(231,76,60,0.4); }
+
+        .auth-link { text-align: center; margin-top: 25px; font-size: 14px; color: var(--text-secondary); }
+        .auth-link a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        .auth-link a:hover { text-decoration: underline; }
+
+        /* FORUM LAYOUT */
+        .forum-wrapper { display: grid; grid-template-columns: 250px 1fr; gap: 30px; padding: 100px 5% 50px; max-width: 1400px; margin: 0 auto; }
+        
+        /* SIDEBAR */
+        .sidebar { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 25px; height: fit-content; position: sticky; top: 100px; }
+        .sidebar-section { margin-bottom: 30px; }
+        .sidebar-title { font-size: 12px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 15px; font-weight: 700; letter-spacing: 1px; }
+        .sidebar-item { padding: 12px 15px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 10px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; font-size: 14px; }
+        .sidebar-item:hover { background: rgba(231,76,60,0.1); border-color: var(--border); transform: translateX(5px); }
+        .sidebar-item i { color: var(--primary); width: 20px; }
+        .sidebar-item.active { background: rgba(231,76,60,0.2); border-color: var(--primary); }
 
         /* MAIN CONTENT */
-        main { padding: 100px 5% 50px; min-height: 100vh; position: relative; z-index: 2; }
+        .main-content { min-height: 80vh; }
         
-        .forum-container { max-width: 1200px; margin: 0 auto; }
-        
-        .forum-header { text-align: center; margin-bottom: 40px; }
-        .forum-header h1 { font-size: clamp(32px,6vw,50px); font-weight: 800; color: var(--primary); margin-bottom: 15px; }
-        .forum-header p { font-size: clamp(14px,2.5vw,18px); color: var(--text-secondary); }
+        .forum-header { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 30px; }
+        .forum-header h1 { font-size: 32px; margin-bottom: 10px; color: var(--primary); }
+        .forum-header p { color: var(--text-secondary); font-size: 15px; }
 
-        /* FORUM POSTS */
-        .user-info { background: rgba(39,174,96,0.08); padding: 12px 15px; border-radius: 8px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
-        .user-info span { font-weight: 500; }
-        .logout-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 6px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s; font-size: 13px; }
-        .logout-btn:hover { background: var(--primary); border-color: var(--primary); }
-
-        .post-form { background: var(--glass); border: 1px solid var(--border); border-radius: 15px; padding: 25px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
-        .post-form h3 { font-size: 20px; margin-bottom: 15px; color: var(--primary); }
-        .post-form textarea { width: 100%; min-height: 100px; padding: 12px 15px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 14px; font-family: 'Montserrat', sans-serif; resize: vertical; }
+        /* POST FORM */
+        .post-form { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 30px; }
+        .post-form h3 { font-size: 20px; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px; }
+        .post-form textarea { width: 100%; min-height: 120px; padding: 16px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-size: 15px; font-family: 'Montserrat', sans-serif; resize: vertical; }
         .post-form textarea:focus { outline: none; border-color: var(--primary); }
-        .submit-btn { width: 100%; padding: 14px; background: var(--primary); border: none; border-radius: 8px; color: white; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; }
-        .submit-btn:hover { background: var(--primary-light); transform: translateY(-2px); }
 
+        /* POSTS */
         .posts-list { display: flex; flex-direction: column; gap: 20px; }
-        .post-item { background: var(--glass); border: 1px solid var(--border); border-radius: 15px; padding: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); transition: all 0.3s; }
-        .post-item:hover { transform: translateY(-3px); border-color: var(--primary); }
-        .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .post-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; }
-        .post-info h4 { font-size: 16px; margin-bottom: 3px; }
-        .post-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
-        .post-content { color: var(--text-secondary); line-height: 1.6; font-size: 14px; margin-bottom: 12px; }
-        .post-actions { display: flex; gap: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .post-action { background: rgba(39,174,96,0.08); border: 1px solid rgba(39,174,96,0.2); padding: 6px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px; }
-        .post-action:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-1px); }
-        .post-action i { font-size: 13px; }
+        .post-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 25px; transition: all 0.3s; }
+        .post-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(231,76,60,0.15); }
+        
+        .post-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .post-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-light)); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; }
+        .post-user-info h4 { font-size: 16px; margin-bottom: 4px; }
+        .post-user-info span { font-size: 12px; color: rgba(255,255,255,0.5); }
+        
+        .post-content { color: var(--text-secondary); line-height: 1.7; font-size: 15px; margin-bottom: 20px; }
+        
+        .post-footer { display: flex; gap: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .post-action { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 10px 18px; border-radius: 10px; font-size: 14px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: white; }
+        .post-action:hover { background: rgba(231,76,60,0.2); border-color: var(--primary); }
+        .post-action.liked { background: rgba(231,76,60,0.2); border-color: var(--primary); color: var(--primary); }
+        .post-action i { font-size: 14px; }
 
-        @media (max-width: 768px) {
-            main { padding: 90px 5% 40px; }
-            .slide-menu { width: 80%; }
+        .empty-state { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 60px 30px; text-align: center; }
+        .empty-state i { font-size: 64px; color: rgba(255,255,255,0.2); margin-bottom: 20px; }
+        .empty-state p { color: var(--text-secondary); font-size: 16px; }
+
+        @media (max-width: 968px) {
+            .forum-wrapper { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <a href="index.html" class="logo">
-            <img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/main-logo.png" alt="Fanatic RP">
-            <span>FANATIC RP</span>
-        </a>
-        <div class="burger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
-    </header>
-
-    <div class="slide-menu">
-        <div class="menu-section-title">ნავიგაცია</div>
-        <div class="menu-item" onclick="navigate('index.html')"><i class="fas fa-home"></i> მთავარი</div>
-        <div class="menu-item" onclick="navigate('donation.html')"><i class="fas fa-shopping-cart"></i> მაღაზია</div>
-        <div class="menu-item" onclick="navigate('forum.html')"><i class="fas fa-comments"></i> ფორუმი</div>
-
-        <div class="menu-section-title">ჩამოტვირთვა</div>
-        <div class="menu-item" onclick="downloadLauncher('pc')"><i class="fas fa-desktop"></i> PC ლაუნჩერი</div>
-        <div class="menu-item" onclick="downloadLauncher('mobile')"><i class="fas fa-mobile-alt"></i> Mobile ლაუნჩერი</div>
-
-        <div class="menu-section-title">Web Development Team</div>
-        <div class="team-member"><i class="fas fa-code"></i> ზვიადი გეგიძე</div>
-        <div class="team-member"><i class="fas fa-code"></i> ნიკა გეორგაძე</div>
-
-        <div class="menu-section-title">სოციალური ქსელები</div>
-        <div class="social-icons">
-            <a href="https://discord.gg/uasS77WA" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
-            <a href="https://www.youtube.com/@tormetitormeti2" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.tiktok.com/@fanaticroleplay777" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
-            <a href="https://www.facebook.com/groups/687009050835555/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-        </div>
-    </div>
-
-    <main>
-        <div class="forum-container">
-            <div class="forum-header">
-                <h1>ფორუმი</h1>
-                <p>შეუერთდით დისკუსიას და იკავშირეთ საზოგადოებასთან</p>
-            </div>
-
-            <div id="forum-posts">
-                <div id="user-info-container">
-                    <div class="user-info">
-                        <span>მოგესალმებით, <strong id="current-user"></strong>!</span>
-                        <button class="logout-btn" onclick="handleLogout()">გასვლა</button>
-                    </div>
-                </div>
-
-                <div class="post-form" id="post-form">
-                    <h3>დაწერეთ პოსტი</h3>
-                    <form onsubmit="handleNewPost(event)">
-                        <div class="form-group">
-                            <textarea id="post-content" placeholder="რას ფიქრობთ?" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">გამოქვეყნება</button>
-                    </form>
-                </div>
-
-                <div class="posts-list" id="posts-container"></div>
-            </div>
-        </div>
-    </main>
+    <div id="app"></div>
 
     <script>
-        // Storage keys
-        const USERS_KEY = 'fanatic_forum_users';
-        const POSTS_KEY = 'fanatic_forum_posts';
-        const CURRENT_USER_KEY = 'fanatic_current_user';
+        // PERSISTENT STORAGE WITH CLAUDE'S STORAGE API
+        const STORAGE_PREFIX = 'fanatic_forum_';
+        
+        class ForumDB {
+            async getUsers() {
+                try {
+                    const result = await window.storage.get(STORAGE_PREFIX + 'users', true);
+                    return result ? JSON.parse(result.value) : [];
+                } catch {
+                    return [];
+                }
+            }
 
-        // Get data from memory
-        let users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-        let posts = JSON.parse(localStorage.getItem(POSTS_KEY) || '[]');
-        let currentUser = localStorage.getItem(CURRENT_USER_KEY);
+            async saveUser(user) {
+                const users = await this.getUsers();
+                users.push(user);
+                await window.storage.set(STORAGE_PREFIX + 'users', JSON.stringify(users), true);
+            }
 
-        // Check if user is logged in
-        if (currentUser) {
-            document.getElementById('current-user').textContent = currentUser;
-            document.getElementById('user-info-container').style.display = 'flex';
-        } else {
-            document.getElementById('user-info-container').style.display = 'none';
-            document.getElementById('post-form').innerHTML = '<p style="text-align:center; color: var(--text-secondary);">შესვლა პოსტის დასამატებლად. <a href="login.html" style="color: var(--primary);">შესვლა</a></p>';
+            async findUser(username, password) {
+                const users = await this.getUsers();
+                return users.find(u => u.username === username && u.password === password);
+            }
+
+            async userExists(username) {
+                const users = await this.getUsers();
+                return users.some(u => u.username === username);
+            }
+
+            async getPosts() {
+                try {
+                    const result = await window.storage.get(STORAGE_PREFIX + 'posts', true);
+                    return result ? JSON.parse(result.value) : [];
+                } catch {
+                    return [];
+                }
+            }
+
+            async savePosts(posts) {
+                await window.storage.set(STORAGE_PREFIX + 'posts', JSON.stringify(posts), true);
+            }
+
+            async addPost(post) {
+                const posts = await this.getPosts();
+                posts.unshift(post);
+                await this.savePosts(posts);
+            }
+
+            async updatePost(postId, updates) {
+                const posts = await this.getPosts();
+                const index = posts.findIndex(p => p.id === postId);
+                if (index !== -1) {
+                    posts[index] = { ...posts[index], ...updates };
+                    await this.savePosts(posts);
+                }
+            }
+
+            async getUserLikes() {
+                const username = localStorage.getItem('current_user');
+                if (!username) return [];
+                try {
+                    const result = await window.storage.get(STORAGE_PREFIX + 'likes_' + username, false);
+                    return result ? JSON.parse(result.value) : [];
+                } catch {
+                    return [];
+                }
+            }
+
+            async addLike(postId) {
+                const username = localStorage.getItem('current_user');
+                const likes = await this.getUserLikes();
+                if (!likes.includes(postId)) {
+                    likes.push(postId);
+                    await window.storage.set(STORAGE_PREFIX + 'likes_' + username, JSON.stringify(likes), false);
+                }
+            }
         }
-        renderPosts();
 
-        function toggleMenu() {
-            document.querySelector('.burger').classList.toggle('active');
-            document.querySelector('.slide-menu').classList.toggle('active');
+        const db = new ForumDB();
+        let currentUser = localStorage.getItem('current_user');
+
+        // ROUTER
+        class Router {
+            constructor() {
+                this.routes = {};
+                this.currentRoute = null;
+            }
+
+            register(path, component) {
+                this.routes[path] = component;
+            }
+
+            navigate(path) {
+                this.currentRoute = path;
+                const component = this.routes[path];
+                if (component) {
+                    document.getElementById('app').innerHTML = '';
+                    component();
+                }
+            }
         }
 
-        function navigate(page) { window.location.href = page; }
-        function downloadLauncher(type) {
-            alert(type === 'pc' ? 'PC ლაუნჩერის ჩამოტვირთვა მალე...' : 'Mobile ლაუნჩერის ჩამოტვირთვა მალე...');
+        const router = new Router();
+
+        // COMPONENTS
+        function Header() {
+            return `
+                <header>
+                    <a href="#" onclick="router.navigate('/forum'); return false;" class="logo">
+                        <img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/main-logo.png" alt="Fanatic RP">
+                        <span>FANATIC RP</span>
+                    </a>
+                    <div class="header-actions">
+                        ${currentUser ? `
+                            <div class="user-badge"><i class="fas fa-user"></i> ${currentUser}</div>
+                            <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> გასვლა</button>
+                        ` : ''}
+                    </div>
+                </header>
+            `;
         }
 
-        // Handle Logout
-        function handleLogout() {
-            localStorage.removeItem(CURRENT_USER_KEY);
-            window.location.reload();
+        function Sidebar() {
+            return `
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">მენიუ</div>
+                        <div class="sidebar-item active"><i class="fas fa-home"></i> მთავარი</div>
+                        <div class="sidebar-item" onclick="window.location.href='index.html'"><i class="fas fa-globe"></i> ვებსაიტი</div>
+                        <div class="sidebar-item" onclick="alert('მალე...')"><i class="fas fa-shopping-cart"></i> მაღაზია</div>
+                    </div>
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">სოციალური</div>
+                        <div class="sidebar-item" onclick="window.open('https://discord.gg/uasS77WA', '_blank')"><i class="fab fa-discord"></i> Discord</div>
+                        <div class="sidebar-item" onclick="window.open('https://www.youtube.com/@tormetitormeti2', '_blank')"><i class="fab fa-youtube"></i> YouTube</div>
+                    </div>
+                </aside>
+            `;
         }
 
-        // Handle New Post
-        function handleNewPost(e) {
-            e.preventDefault();
-            const content = document.getElementById('post-content').value.trim();
-            
-            if (!content) return;
+        // LOGIN PAGE
+        async function LoginPage() {
+            document.getElementById('app').innerHTML = `
+                ${Header()}
+                <div class="auth-container">
+                    <div class="auth-box">
+                        <h1><i class="fas fa-sign-in-alt"></i> შესვლა</h1>
+                        <p>შედით თქვენს ანგარიშში ფორუმზე წვდომისთვის</p>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label>მომხმარებლის სახელი</label>
+                                <input type="text" id="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label>პაროლი</label>
+                                <input type="password" id="password" required>
+                            </div>
+                            <button type="submit" class="btn-primary">შესვლა</button>
+                        </form>
+                        <div class="auth-link">არ გაქვთ ანგარიში? <a href="#" onclick="router.navigate('/register'); return false;">რეგისტრაცია</a></div>
+                    </div>
+                </div>
+            `;
 
-            const newPost = {
-                id: Date.now(),
-                author: currentUser,
-                content: content,
-                timestamp: new Date().toLocaleString('ka-GE'),
-                likes: 0
+            document.getElementById('login-form').onsubmit = async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+                
+                const user = await db.findUser(username, password);
+                if (user) {
+                    localStorage.setItem('current_user', username);
+                    currentUser = username;
+                    router.navigate('/forum');
+                } else {
+                    alert('არასწორი მომხმარებლის სახელი ან პაროლი');
+                }
             };
-
-            posts.unshift(newPost);
-            localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
-            document.getElementById('post-content').value = '';
-            renderPosts();
         }
 
-        // Render Posts
-        function renderPosts() {
-            const container = document.getElementById('posts-container');
+        // REGISTER PAGE
+        async function RegisterPage() {
+            document.getElementById('app').innerHTML = `
+                ${Header()}
+                <div class="auth-container">
+                    <div class="auth-box">
+                        <h1><i class="fas fa-user-plus"></i> რეგისტრაცია</h1>
+                        <p>შექმენით ახალი ანგარიში ფორუმზე</p>
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label>მომხმარებლის სახელი</label>
+                                <input type="text" id="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label>ელ-ფოსტა</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>პაროლი</label>
+                                <input type="password" id="password" required>
+                            </div>
+                            <button type="submit" class="btn-primary">რეგისტრაცია</button>
+                        </form>
+                        <div class="auth-link">უკვე გაქვთ ანგარიში? <a href="#" onclick="router.navigate('/login'); return false;">შესვლა</a></div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('register-form').onsubmit = async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                
+                if (await db.userExists(username)) {
+                    alert('ეს მომხმარებლის სახელი უკვე არსებობს');
+                    return;
+                }
+
+                await db.saveUser({ username, email, password, joined: new Date().toISOString() });
+                localStorage.setItem('current_user', username);
+                currentUser = username;
+                router.navigate('/forum');
+            };
+        }
+
+        // FORUM PAGE
+        async function ForumPage() {
+            const posts = await db.getPosts();
+            const userLikes = await db.getUserLikes();
+
+            document.getElementById('app').innerHTML = `
+                ${Header()}
+                <div class="forum-wrapper">
+                    ${Sidebar()}
+                    <main class="main-content">
+                        <div class="forum-header">
+                            <h1>საზოგადოების ფორუმი</h1>
+                            <p>შეუერთდით დისკუსიას და გაუზიარეთ თქვენი აზრი</p>
+                        </div>
+
+                        <div class="post-form">
+                            <h3><i class="fas fa-pen"></i> დაწერეთ პოსტი</h3>
+                            <form id="post-form">
+                                <textarea id="post-content" placeholder="რას ფიქრობთ?" required></textarea>
+                                <button type="submit" class="btn-primary" style="margin-top: 15px;">გამოქვეყნება</button>
+                            </form>
+                        </div>
+
+                        <div class="posts-list" id="posts-container">
+                            ${posts.length === 0 ? `
+                                <div class="empty-state">
+                                    <i class="fas fa-comments"></i>
+                                    <p>ჯერ არ არის პოსტები. იყავით პირველი!</p>
+                                </div>
+                            ` : posts.map(post => `
+                                <div class="post-card">
+                                    <div class="post-header">
+                                        <div class="post-avatar">${post.author.charAt(0).toUpperCase()}</div>
+                                        <div class="post-user-info">
+                                            <h4>${post.author}</h4>
+                                            <span>${new Date(post.timestamp).toLocaleString('ka-GE')}</span>
+                                        </div>
+                                    </div>
+                                    <div class="post-content">${post.content}</div>
+                                    <div class="post-footer">
+                                        <div class="post-action ${userLikes.includes(post.id) ? 'liked' : ''}" onclick="likePost(${post.id})">
+                                            <i class="fas fa-heart"></i> ${post.likes || 0}
+                                        </div>
+                                        <div class="post-action">
+                                            <i class="fas fa-comment"></i> კომენტარი
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </main>
+                </div>
+            `;
+
+            document.getElementById('post-form').onsubmit = async (e) => {
+                e.preventDefault();
+                const content = document.getElementById('post-content').value.trim();
+                
+                if (!content) return;
+
+                await db.addPost({
+                    id: Date.now(),
+                    author: currentUser,
+                    content: content,
+                    timestamp: new Date().toISOString(),
+                    likes: 0
+                });
+
+                router.navigate('/forum');
+            };
+        }
+
+        // LIKE POST
+        async function likePost(postId) {
+            const userLikes = await db.getUserLikes();
             
-            if (posts.length === 0) {
-                container.innerHTML = '<div class="post-item"><p style="text-align:center;color:rgba(255,255,255,0.5)">ჯერ არ არის პოსტები. იყავით პირველი!</p></div>';
+            if (userLikes.includes(postId)) {
+                alert('თქვენ უკვე მოიწონეთ ეს პოსტი');
                 return;
             }
 
-            container.innerHTML = posts.map(post => `
-                <div class="post-item">
-                    <div class="post-header">
-                        <div class="post-avatar">${post.author.charAt(0).toUpperCase()}</div>
-                        <div class="post-info">
-                            <h4>${post.author}</h4>
-                            <span>${post.timestamp}</span>
-                        </div>
-                    </div>
-                    <div class="post-content">${post.content}</div>
-                    <div class="post-actions">
-                        <div class="post-action" onclick="likePost(${post.id})">
-                            <i class="fas fa-heart"></i> ${post.likes} მოწონება
-                        </div>
-                        <div class="post-action">
-                            <i class="fas fa-comment"></i> კომენტარი
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Like Post
-        function likePost(postId) {
+            const posts = await db.getPosts();
             const post = posts.find(p => p.id === postId);
             if (post) {
-                post.likes++;
-                localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
-                renderPosts();
+                await db.updatePost(postId, { likes: (post.likes || 0) + 1 });
+                await db.addLike(postId);
+                router.navigate('/forum');
             }
+        }
+
+        // LOGOUT
+        function logout() {
+            localStorage.removeItem('current_user');
+            currentUser = null;
+            router.navigate('/login');
+        }
+
+        // REGISTER ROUTES
+        router.register('/login', LoginPage);
+        router.register('/register', RegisterPage);
+        router.register('/forum', ForumPage);
+
+        // INIT
+        if (currentUser) {
+            router.navigate('/forum');
+        } else {
+            router.navigate('/login');
         }
     </script>
 </body>
