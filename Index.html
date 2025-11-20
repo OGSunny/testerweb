@@ -304,12 +304,11 @@
         }
         
         .logo img { 
-            width: 45px; 
-            height: 45px; 
+            width: 55px; 
+            height: 55px; 
             border-radius: 50%; 
             transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); 
             object-fit: cover; 
-            border: 2px solid var(--christmas-gold); 
             box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
         }
         
@@ -337,27 +336,64 @@
         .team-member { padding: 10px 12px; font-size: 13px; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 8px; border-radius: 6px; background: rgba(231,76,60,0.04); margin-bottom: 6px; }
         .team-member i { font-size: 14px; color: var(--primary); }
 
-        /* HERO – შენი მოთხოვნილი ცვლილება */
+        /* HERO */
         .hero {
-            min-height: 80vh; /* Reduced to 80% of viewport height */
-            /* min-height: 60vh; */ /* თუ კიდევ უფრო დაბლა გინდა, მოაშორე კომენტარი */
+            min-height: 80vh;
             display: flex; 
             flex-direction: row; 
             align-items: center; 
             justify-content: space-between; 
             text-align: left; 
-            padding: 120px 5% 50px; /* Keep the existing padding */
+            padding: 120px 5% 50px; 
             position: relative; 
             overflow: hidden; 
         }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%); z-index: 2; }
-        .hero-content { position: relative; z-index: 3; background: rgba(10, 13, 27, 0.3); backdrop-filter: blur(15px); padding: 50px 30px; border-radius: 25px; border: 1px solid rgba(231, 76, 60, 0.12); box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08); display: flex; flex-direction: column; align-items: flex-start; gap: 24px; max-width: 50%; transition: all 0.5s ease; }
-        .hero-content:hover { background: rgba(10, 13, 27, 0.4); border-color: rgba(231, 76, 60, 0.2); }
-        .hero h1 { font-size: clamp(42px,9vw,80px); font-weight: 900; background: linear-gradient(135deg,#ffffff 0%,var(--primary-light) 40%,var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 3px; line-height: 1.1; filter: drop-shadow(0 8px 25px rgba(231,76,60,0.4)); animation: neonPulse 3.5s ease-in-out infinite; }
+        .hero-content { 
+            position: relative; 
+            z-index: 3; 
+            padding: 50px 30px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex-start; 
+            gap: 24px; 
+            max-width: 50%; 
+            transition: all 0.5s ease; 
+        }
+        .hero h1 { 
+            font-size: clamp(42px,9vw,80px); 
+            font-weight: 900; 
+            letter-spacing: 3px; 
+            line-height: 1.1; 
+            animation: neonPulse 3.5s ease-in-out infinite; 
+        }
+        .fanatic {
+            color: #ffffff;
+            filter: drop-shadow(0 8px 25px rgba(255,255,255,0.4));
+        }
+        .roleplay {
+            color: var(--primary);
+            filter: drop-shadow(0 8px 25px rgba(231,76,60,0.4));
+        }
         .hero-subtitle { font-size: clamp(16px,3.5vw,24px); color: rgba(255, 255, 255, 0.8); font-weight: 500; letter-spacing: 1.5px; }
-        .ip-btn { padding: 20px 60px; font-size: clamp(18px,2.8vw,28px); font-weight: 800; background: linear-gradient(135deg,var(--primary),var(--primary-light),var(--primary-dark)); color: white; border-radius: 50px; cursor: pointer; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); position: relative; overflow: hidden; letter-spacing: 1.5px; box-shadow: 0 12px 40px rgba(231,76,60,0.4); font-family: 'Space Mono', monospace; border: none; }
-        .ip-btn:before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent); transition: left 0.7s; }
-        .ip-btn:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 25px 70px rgba(231,76,60,0.9); }
+        .ip-btn { 
+            padding: 20px 60px; 
+            font-size: clamp(18px,2.8vw,28px); 
+            font-weight: 800; 
+            background: #ffffff; 
+            color: #000000; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); 
+            position: relative; 
+            overflow: hidden; 
+            letter-spacing: 1.5px; 
+            box-shadow: 0 12px 40px rgba(255,255,255,0.4); 
+            font-family: 'Space Mono', monospace; 
+            border: none; 
+        }
+        .ip-btn:before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg,transparent,rgba(0,0,0,0.1),transparent); transition: left 0.7s; }
+        .ip-btn:hover { transform: translateY(-6px) scale(1.04); box-shadow: 0 25px 70px rgba(255,255,255,0.9); }
         .ip-btn:hover:before { left: 100%; }
         @keyframes neonPulse { 0%,100% { filter: drop-shadow(0 8px 25px rgba(231,76,60,0.4)); } 50% { filter: drop-shadow(0 8px 40px rgba(231,76,60,0.8)); } }
 
@@ -371,10 +407,9 @@
         }
 
         .hero-image img {
-            max-height: 70vh;
+            max-height: 85vh;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(231,76,60,0.5));
             transition: all 0.5s ease;
         }
 
@@ -408,8 +443,7 @@
         @media (max-width: 768px) {
             .hero { padding: 100px 5% 35px; flex-direction: column; justify-content: center; }
             .hero-content { padding: 40px 25px; gap: 22px; max-width: 95%; align-items: center; text-align: center; }
-            .hero-image { width: 100%; margin-top: 20px; }
-            .hero-image img { max-height: 40vh; }
+            .hero-image { display: none; }
             .ip-btn { padding: 18px 45px; }
             section { padding: clamp(35px,5vw,50px) 5%; }
             section#features { padding-top: clamp(25px,4vw,35px); }
@@ -424,7 +458,7 @@
         }
         @media (max-width: 480px) {
             .logo { font-size: 18px; padding: 8px 12px; }
-            .logo img { width: 35px; height: 35px; }
+            .logo img { width: 45px; height: 45px; }
             .ip-btn { padding: 16px 35px; }
             .slide-menu { width: 100vw; padding: 70px 20px 30px; }
             .logo::before { left: -6px; font-size: 16px; }
@@ -434,7 +468,6 @@
             .title { letter-spacing: 1px; }
             .snowflake { font-size: 0.8em; }
             .orb { filter: blur(60px); opacity: 0.12; }
-            .hero-image img { max-height: 30vh; }
         }
 
         a, button { outline: none; }
@@ -503,7 +536,7 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>FANATIC ROLE PLAY</h1>
+            <h1><span class="fanatic">FANATIC</span> <span class="roleplay">ROLE PLAY</span></h1>
             <p class="hero-subtitle">ერთ-ერთი საუკეთესო SA-MP სერვერი საქართველოში • 2025</p>
             <button class="ip-btn" onclick="copyIP()">185.189.255.97:2561</button>
         </div>
@@ -609,7 +642,7 @@
         gsap.utils.toArray('.title, .about-section, footer').forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 0.7, scrollTrigger: { trigger: el, start: 'top 85%' } }));
         gsap.to('.orb-1', { y: 250, scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom top', scrub: 1.2 } });
         gsap.to('.orb-2', { y: -150, scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom top', scrub: 1.2 } });
-        gsap.fromTo('.ip-btn', { boxShadow: '0 12px 40px rgba(231,76,60,0.5)' }, { boxShadow: '0 12px 40px rgba(231,76,60,0.7), 0 0 25px rgba(231,76,60,0.3)', duration: 1.8, repeat: -1, yoyo: true });
+        gsap.fromTo('.ip-btn', { boxShadow: '0 12px 40px rgba(255,255,255,0.5)' }, { boxShadow: '0 12px 40px rgba(255,255,255,0.7), 0 0 25px rgba(255,255,255,0.3)', duration: 1.8, repeat: -1, yoyo: true });
     </script>
 </body>
 </html>
