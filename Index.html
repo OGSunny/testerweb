@@ -103,7 +103,7 @@
         .orb-3 { width: 450px; height: 450px; background: #9b59b6; bottom: 10%; left: 40%; animation: float 30s ease-in-out infinite; }
         @keyframes float { 0%,100% { transform: translate(0,0); } 33% { transform: translate(50px,-50px); } 66% { transform: translate(-30px,30px); } }
 
-        /* HEADER & MENU WITH CHRISTMAS DECORATIONS */
+        /* HEADER */
         header { 
             position: fixed; 
             top: 0; 
@@ -120,6 +120,74 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.6); 
         }
         
+        /* NEW BEAUTIFUL CHRISTMAS LIGHTS */
+        .christmas-lights-string {
+            position: absolute;
+            top: -34px;
+            left: -50px;
+            right: -50px;
+            height: 60px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .lights-wire {
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #2c3e50;
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
+
+        .light-bulb {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            top: 12px;
+            box-shadow: 
+                0 0 20px 6px currentColor,
+                0 0 35px 10px currentColor,
+                inset 0 0 10px rgba(255,255,255,0.5);
+            animation: hang 4s ease-in-out infinite, flicker 6s infinite;
+        }
+
+        .light-bulb::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 16px;
+            background: #2c3e50;
+        }
+
+        .light-bulb:nth-child(1)  { left: 6%;  background: var(--christmas-red); color: #ff4560; animation-delay: 0s; }
+        .light-bulb:nth-child(2)  { left: 16%; background: var(--christmas-green); color: #00ff7f; animation-delay: 0.3s; }
+        .light-bulb:nth-child(3)  { left: 26%; background: var(--christmas-gold); color: #ffff66; animation-delay: 0.6s; }
+        .light-bulb:nth-child(4)  { left: 36%; background: #ffffff; color: #ffffff; animation-delay: 0.9s; }
+        .light-bulb:nth-child(5)  { left: 46%; background: var(--christmas-red); color: #ff4560; animation-delay: 1.2s; }
+        .light-bulb:nth-child(6)  { left: 56%; background: var(--christmas-green); color: #00ff7f; animation-delay: 1.5s; }
+        .light-bulb:nth-child(7)  { left: 66%; background: var(--christmas-gold); color: #ffff66; animation-delay: 1.8s; }
+        .light-bulb:nth-child(8)  { left: 76%; background: var(--christmas-red); color: #ff4560; animation-delay: 2.1s; }
+        .light-bulb:nth-child(9)  { left: 86%; background: var(--christmas-green); color: #00ff7f; animation-delay: 2.4s; }
+        .light-bulb:nth-child(10) { left: 96%; background: var(--christmas-gold); color: #ffff66; animation-delay: 2.7s; }
+
+        @keyframes hang {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50%      { transform: translateY(8px) rotate(4deg); }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50%  { opacity: 0.9; }
+            25%, 75% { opacity: 0.95; }
+        }
+
         .logo { 
             display: flex; 
             align-items: center; 
@@ -130,7 +198,7 @@
             text-decoration: none; 
             letter-spacing: 1px; 
             position: relative;
-            padding: 10px 20px;
+            padding: 28px 20px 10px 20px;
             background: linear-gradient(135deg, rgba(193, 30, 58, 0.15), rgba(15, 125, 63, 0.15));
             border-radius: 50px;
             border: 2px solid transparent;
@@ -167,33 +235,6 @@
             50% { transform: translateY(-60%); }
         }
         
-        .logo-decoration {
-            position: absolute;
-            pointer-events: none;
-        }
-        
-        .logo-decoration.lights {
-            top: -8px;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                var(--christmas-red) 0%, 
-                var(--christmas-gold) 20%, 
-                var(--christmas-green) 40%, 
-                var(--christmas-red) 60%, 
-                var(--christmas-gold) 80%, 
-                var(--christmas-green) 100%);
-            border-radius: 50px;
-            animation: lightsPulse 2s ease-in-out infinite;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-        }
-        
-        @keyframes lightsPulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
-            50% { opacity: 0.6; box-shadow: 0 0 20px rgba(255, 215, 0, 0.9); }
-        }
-        
         .logo img { 
             width: 50px; 
             height: 50px; 
@@ -208,7 +249,7 @@
             transform: scale(1.15) rotate(360deg); 
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
         }
-        
+
         .burger { display: flex; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1001; }
         .burger span { width: 28px; height: 2.5px; background: white; border-radius: 3px; transition: 0.5s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
         .burger.active span:nth-child(1) { transform: rotate(45deg) translate(10px,10px); }
@@ -271,9 +312,10 @@
             section#features { padding-top: clamp(30px,5vw,40px); }
             .logo::before { left: -10px; font-size: 20px; }
             .logo::after { right: -10px; font-size: 20px; }
+            .christmas-lights-string { top: -28px; left: -30px; right: -30px; }
         }
         @media (max-width: 480px) {
-            .logo { font-size: 20px; padding: 8px 15px; }
+            .logo { font-size: 20px; padding: 8px 15px 8px 15px; padding-top: 30px; }
             .logo img { width: 40px; height: 40px; }
             .ip-btn { padding: 18px 40px; }
             .slide-menu { width: 90%; }
@@ -305,7 +347,21 @@
 
     <header>
         <a href="index.html" class="logo">
-            <div class="logo-decoration lights"></div>
+            <!-- NEW CHRISTMAS LIGHTS -->
+            <div class="christmas-lights-string">
+                <div class="lights-wire"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+                <div class="light-bulb"></div>
+            </div>
+
             <img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/main-logo.png" alt="Fanatic RP">
             <span>FANATIC RP</span>
         </a>
@@ -314,7 +370,7 @@
         </div>
     </header>
 
-    <!-- SLIDE MENU WITH NEW ITEMS -->
+    <!-- SLIDE MENU -->
     <div class="slide-menu">
         <div class="menu-section-title">ნავიგაცია</div>
         <div class="menu-item" onclick="navigate('index.html')"><i class="fas fa-home"></i> მთავარი</div>
@@ -395,10 +451,6 @@
                 snowflake.style.fontSize = (0.5 + Math.random() * 1.5) + 'em';
                 
                 snowContainer.appendChild(snowflake);
-                
-                setTimeout(() => {
-                    createSnowflake();
-                }, (duration + delay) * 1000);
             }
         }
         
@@ -409,12 +461,10 @@
             snowflake.textContent = '❄';
             
             const left = Math.random() * window.innerWidth;
-            const delay = 0;
             const duration = 8 + Math.random() * 6;
             const drift = (Math.random() - 0.5) * 200;
             
             snowflake.style.left = left + 'px';
-            snowflake.style.animationDelay = delay + 's';
             snowflake.style.animationDuration = duration + 's';
             snowflake.style.setProperty('--drift', drift + 'px');
             snowflake.style.fontSize = (0.5 + Math.random() * 1.5) + 'em';
@@ -428,6 +478,7 @@
         }
         
         createSnowflakes();
+        setInterval(createSnowflake, 600);
 
         function toggleMenu() {
             document.querySelector('.burger').classList.toggle('active');
