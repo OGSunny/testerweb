@@ -317,11 +317,80 @@
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
         }
 
-        .burger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
-        .burger span { width: 25px; height: 2px; background: white; border-radius: 3px; transition: 0.4s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
-        .burger.active span:nth-child(1) { transform: rotate(45deg) translate(8px,8px); }
-        .burger.active span:nth-child(2) { opacity: 0; transform: translateX(12px); }
-        .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+        /* Enhanced Burger Menu Styles */
+        .toggle-wrap {
+            padding: 10px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1001;
+
+            /*disable selection*/
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .toggle-bar,
+        .toggle-bar::before,
+        .toggle-bar::after,
+        .toggle-wrap.active .toggle-bar,
+        .toggle-wrap.active .toggle-bar::before,
+        .toggle-wrap.active .toggle-bar::after {
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .toggle-bar {
+            width: 25px;
+            margin: 5px 0;
+            position: relative;
+            border-top: 2px solid white;
+            display: block;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .toggle-bar::before,
+        .toggle-bar::after {
+            content: "";
+            display: block;
+            background: white;
+            height: 2px;
+            width: 25px;
+            position: absolute;
+            top: -8px;
+            -ms-transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            -ms-transform-origin: 13%;
+            -webkit-transform-origin: 13%;
+            transform-origin: 13%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .toggle-bar::after {
+            top: 4px;
+        }
+
+        .toggle-wrap.active .toggle-bar {
+            border-top: 2px solid transparent;
+        }
+
+        .toggle-wrap.active .toggle-bar::before {
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .toggle-wrap.active .toggle-bar::after {
+            -ms-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
 
         .slide-menu { position: fixed; top: 0; right: -100%; width: min(350px, 90vw); height: 100vh; background: linear-gradient(135deg, rgba(10,13,27,0.98), rgba(20,28,50,0.95)); backdrop-filter: blur(25px); border-left: 1px solid var(--border); padding: 80px 25px 35px; transition: right 0.5s cubic-bezier(0.34,1.56,0.64,1); z-index: 999; box-shadow: -12px 0 50px rgba(0,0,0,0.6); overflow-y: auto; }
         .slide-menu.active { right: 0; }
@@ -429,9 +498,7 @@
         .card h3 { font-size: clamp(20px,3.5vw,26px); margin-bottom: 14px; font-weight: 700; }
         .card p { font-size: clamp(14px,2.2vw,17px); color: var(--text-secondary); line-height: 1.6; }
 
-        .about-section { background: var(--glass); backdrop-filter: blur(25px); border-radius: 25px; padding: clamp(40px,8vw,70px); margin: 0 auto; max-width: 1100px; border: 1.5px solid var(--border); box-shadow: 0 15px 50px rgba(0,0,0,0.35), var(--neon-glow); }
-        .about-section h2 { font-size: clamp(32px,7vw,50px); text-align: center; margin-bottom: 30px; background: linear-gradient(135deg,#e74c3c 0%,#ff8c7a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .about-section p { font-size: clamp(15px,2.8vw,19px); line-height: 1.8; color: var(--text-secondary); text-align: center; }
+        #about p { font-size: clamp(15px,2.8vw,19px); line-height: 1.8; color: var(--text-secondary); text-align: center; max-width: 1100px; margin: 0 auto; }
 
         footer { background: linear-gradient(135deg,rgba(5,6,9,0.95),rgba(10,13,27,0.95)); backdrop-filter: blur(15px); padding: clamp(50px,8vw,80px) 5% clamp(35px,5vw,50px); text-align: center; border-top: 1.5px solid var(--border); }
         footer p { font-size: clamp(13px,1.8vw,15px); color: rgba(255,255,255,0.45); font-weight: 500; }
@@ -505,8 +572,8 @@
             <img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg" alt="Zanatic RP">
             <span>Zanatic RP</span>
         </a>
-        <div class="burger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+        <div class="toggle-wrap" onclick="toggleMenu(this)">
+            <span class="toggle-bar"></span>
         </div>
     </header>
 
@@ -556,12 +623,7 @@
 
     <section id="about">
         <h2 class="title">ჩვენს შესახებ</h2>
-        <div class="cards">
-            <div class="card">
-                <i class="fas fa-info-circle"></i>
-                <p>Zanatic Role Play არის საქართველოს ერთ-ერთი საუკეთესო SA-MP სერვერი, რომელიც გთავაზობთ უნიკალურ როლურ გამოცდილებას. ჩვენ ვქმნით საუკეთესო გარემოს მოთამაშეებისთვის, სადაც თქვენ შეგიძლიათ იყოთ ნებისმიერი ვინც გინდათ — პოლიციელი, ბიზნესმენი, კრიმინალი ან უბრალოდ მშვიდი მოქალაქე. შემოგვიერთდით და გახდით ნაწილი ჩვენი დიდი ოჯახისა!</p>
-            </div>
-        </div>
+        <p>Zanatic Role Play არის საქართველოს ერთ-ერთი საუკეთესო SA-MP სერვერი, რომელიც გთავაზობთ უნიკალურ როლურ გამოცდილებას. ჩვენ ვქმნით საუკეთესო გარემოს მოთამაშეებისთვის, სადაც თქვენ შეგიძლიათ იყოთ ნებისმიერი ვინც გინდათ — პოლიციელი, ბიზნესმენი, კრიმინალი ან უბრალოდ მშვიდი მოქალაქე. შემოგვიერთდით და გახდით ნაწილი ჩვენი დიდი ოჯახისა!</p>
     </section>
 
     <footer>
@@ -615,8 +677,8 @@
         createSnowflakes();
         setInterval(createSnowflake, 800);
 
-        function toggleMenu() {
-            document.querySelector('.burger').classList.toggle('active');
+        function toggleMenu(e) {
+            e.classList.toggle('active');
             document.querySelector('.slide-menu').classList.toggle('active');
         }
 
@@ -642,7 +704,7 @@
         });
 
         gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray('.title, .about-section, footer').forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 0.7, scrollTrigger: { trigger: el, start: 'top 85%' } }));
+        gsap.utils.toArray('.title, #about p, footer').forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 0.7, scrollTrigger: { trigger: el, start: 'top 85%' } }));
         gsap.to('.orb-1', { y: 250, scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom top', scrub: 1.2 } });
         gsap.to('.orb-2', { y: -150, scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom top', scrub: 1.2 } });
         gsap.fromTo('.ip-btn', { boxShadow: '0 12px 40px rgba(255,255,255,0.5)' }, { boxShadow: '0 12px 40px rgba(255,255,255,0.7), 0 0 25px rgba(255,255,255,0.3)', duration: 1.8, repeat: -1, yoyo: true });
