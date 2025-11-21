@@ -1,10 +1,9 @@
-<!-- forum.html -->
 <!DOCTYPE html>
 <html lang="ka">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ფორუმი • Zaratic Role Play</title>
+    <title>ფორუმის სექცია • Zaratic Role Play</title>
     
     <link rel="icon" href="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -30,14 +29,12 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
         body {
             font-family: 'Noto Sans Georgian', 'Montserrat', sans-serif;
             background: #000000;
             color: var(--text-primary);
             overflow-x: hidden;
             min-height: 100vh;
-            transition: all 0.5s ease;
         }
 
         #particles-js { 
@@ -48,6 +45,7 @@
             left: 0; 
             z-index: -2; 
             background: radial-gradient(ellipse at top, #1a1f3a 0%, #000000 50%); 
+            pointer-events: none;
         }
 
         .glow-orbs { 
@@ -65,33 +63,12 @@
             border-radius: 50%; 
             filter: blur(100px); 
             opacity: 0.2; 
-            transition: all 2s ease;
-        }
-        .orb-1 { 
-            width: 500px; 
-            height: 500px; 
-            background: var(--primary); 
-            top: -15%; 
-            left: 15%; 
             animation: float 20s ease-in-out infinite; 
         }
-        .orb-2 { 
-            width: 450px; 
-            height: 450px; 
-            background: var(--accent); 
-            top: 60%; 
-            right: 10%; 
-            animation: float 25s ease-in-out infinite reverse; 
-        }
-        .orb-3 { 
-            width: 300px; 
-            height: 300px; 
-            background: var(--primary-light); 
-            bottom: -10%; 
-            left: 50%; 
-            animation: float 28s ease-in-out infinite; 
-        }
-        
+        .orb-1 { width: 500px; height: 500px; background: var(--primary); top: -15%; left: 15%; }
+        .orb-2 { width: 450px; height: 450px; background: var(--accent); top: 60%; right: 10%; animation-direction: reverse; animation-duration: 25s; }
+        .orb-3 { width: 300px; height: 300px; background: var(--primary-light); bottom: -10%; left: 50%; animation-duration: 28s; }
+
         @keyframes float { 
             0%,100% { transform: translate(0,0) scale(1); } 
             33% { transform: translate(50px,-50px) scale(1.05); } 
@@ -99,413 +76,226 @@
         }
 
         header { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            padding: 15px 5%; 
-            background: var(--glass); 
-            backdrop-filter: blur(25px); 
-            border-bottom: 1px solid var(--border); 
-            z-index: 1000; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            box-shadow: var(--shadow); 
-            transition: all 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%; padding: 15px 5%; 
+            background: var(--glass); backdrop-filter: blur(25px); 
+            border-bottom: 1px solid var(--border); z-index: 1000; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-shadow: var(--shadow);
         }
 
         .logo { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            font-size: 24px; 
-            font-weight: 900; 
-            color: white; 
-            text-decoration: none; 
-            letter-spacing: 1px; 
-            transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 12px; font-size: 24px; 
+            font-weight: 900; color: white; text-decoration: none;
         }
-        
         .logo img { 
-            width: 55px; 
-            height: 55px; 
-            border-radius: 50%; 
-            transition: all 0.4s ease; 
-            object-fit: cover; 
-            box-shadow: 0 0 5px var(--primary);
+            width: 55px; height: 55px; border-radius: 50%; object-fit: cover; 
+            box-shadow: 0 0 10px var(--primary); transition: 0.4s;
         }
-        
-        .logo:hover img { 
-            transform: scale(1.1) rotate(360deg); 
-        }
+        .logo:hover img { transform: scale(1.1) rotate(360deg); }
 
         .back-btn {
-            padding: 12px 30px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: none;
+            padding: 12px 30px; background: var(--primary); color: white; 
+            border: none; border-radius: 8px; font-weight: 700; cursor: pointer;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        .container { max-width: 1200px; margin: 100px auto 50px; padding: 20px; }
+
+        .section-header {
+            background: var(--glass); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 12px; padding: 30px;
+            margin-bottom: 30px; box-shadow: var(--shadow);
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .back-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+        .section-info h1 { 
+            font-size: 32px; color: var(--primary); margin-bottom: 10px;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 100px auto 50px;
-            padding: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1s ease forwards;
+        .section-info p { 
+            color: var(--text-secondary); font-size: 16px;
         }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .auth-section {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .auth-section h2 {
-            font-size: 32px;
-            margin-bottom: 30px;
-            color: var(--primary);
-        }
-
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .auth-input {
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .auth-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 5px var(--primary);
-        }
-
-        .auth-btn {
-            padding: 15px 40px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: none;
-        }
-
-        .auth-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .switch-auth {
-            margin-top: 20px;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .switch-auth a {
-            color: var(--primary);
-            cursor: pointer;
-            text-decoration: underline;
-            transition: all 0.3s ease;
-        }
-
-        .switch-auth a:hover {
-            color: var(--primary-light);
-        }
-
-        .forum-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .forum-content.active {
-            display: block;
-            opacity: 1;
-        }
-
-        .user-info {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .user-info h3 {
-            color: var(--primary);
-            font-size: 20px;
-        }
-
-        .logout-btn {
-            padding: 10px 25px;
-            background: transparent;
-            color: white;
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            font-size: 14px;
+        .user-badge {
+            background: rgba(231, 76, 60, 0.1); border: 1px solid var(--primary);
+            padding: 12px 20px; border-radius: 8px; color: white;
+            display: flex; align-items: center; gap: 10px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
-        .logout-btn:hover {
-            background: var(--primary);
-            color: white;
+        .user-badge i { color: var(--primary); }
+
+        .post-form {
+            background: var(--glass); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 12px; 
+            padding: 30px; margin-bottom: 30px; box-shadow: var(--shadow);
         }
 
-        .forum-grid {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
-            margin-top: 30px;
+        .form-group { margin-bottom: 20px; }
+        .form-group label { 
+            display: block; margin-bottom: 8px; color: var(--text-secondary); 
+            font-weight: 600; font-size: 14px; text-transform: uppercase;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%; padding: 12px 15px; background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border); border-radius: 8px; color: white;
+            font-family: inherit; transition: 0.3s; font-size: 14px;
         }
 
-        .sidebar {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
+        .form-textarea { min-height: 140px; resize: vertical; }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none; border-color: var(--primary); 
+            box-shadow: 0 0 15px rgba(231,76,60,0.3);
+            background: rgba(231,76,60,0.05);
+        }
+
+        .form-buttons {
+            display: flex; gap: 12px;
+        }
+
+        .submit-btn, .cancel-btn {
+            padding: 12px 30px; border: none; border-radius: 8px; 
+            font-weight: 700; cursor: pointer; transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            background: var(--primary); color: white;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark); transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: transparent; color: var(--text-secondary);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            height: fit-content;
-            position: sticky;
-            top: 100px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
         }
 
-        .sidebar h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .cancel-btn:hover {
+            background: rgba(255,255,255,0.05); color: white;
         }
 
-        .forum-category {
-            margin-bottom: 30px;
+        .posts-container {
+            display: flex; flex-direction: column; gap: 20px;
         }
 
-        .category-title {
-            font-size: 12px;
-            color: rgba(255,255,255,0.4);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            font-weight: 700;
+        .post {
+            background: var(--glass); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 12px; 
+            padding: 25px; transition: all 0.3s; box-shadow: var(--shadow);
         }
 
-        .forum-item {
-            padding: 12px 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 5px;
-            font-size: 14px;
+        .post:hover { 
+            border-color: var(--primary); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(231,76,60,0.25);
+        }
+
+        .post-header { 
+            display: flex; justify-content: space-between; align-items: flex-start; 
+            margin-bottom: 15px; padding-bottom: 15px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .post-author { 
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        .author-avatar {
+            width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex; align-items: center; justify-content: center; 
+            font-weight: bold; color: white; font-size: 18px;
+            box-shadow: 0 0 10px rgba(231,76,60,0.4);
+        }
+
+        .author-info h4 {
+            font-size: 15px; color: white; margin-bottom: 4px;
+        }
+
+        .post-date { 
+            font-size: 12px; color: rgba(255,255,255,0.5);
+        }
+
+        .post-title { 
+            font-size: 22px; margin: 15px 0 10px; 
+            color: white; font-weight: 700;
+        }
+
+        .post-content { 
+            color: var(--text-secondary); line-height: 1.7; 
+            font-size: 14px; margin: 15px 0;
+        }
+
+        .post-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 15px; padding-top: 15px; 
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 12px; color: rgba(255,255,255,0.5);
+        }
+
+        .empty-state { 
+            text-align: center; padding: 100px 20px; 
+            background: var(--glass); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 12px;
             color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .forum-item i {
-            color: var(--primary);
-            font-size: 14px;
-            width: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .forum-item:hover {
-            background: rgba(231,76,60,0.1);
-            color: white;
-            padding-left: 20px;
-        }
-
-        .forum-item.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .forum-item.active i {
-            color: white;
-        }
-
-        .main-content {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-            min-height: 600px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .forum-header {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-            opacity: 0;
-            transform: translateY(-10px);
-            animation: slideIn 0.5s ease forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .forum-header h2 {
-            font-size: 28px;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .forum-header p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-        }
-
-        .empty-state i {
-            font-size: 60px;
-            color: var(--primary);
-            margin-bottom: 20px;
-            opacity: 0.5;
-            transition: all 0.3s ease;
-        }
-
-        .empty-state:hover i {
-            opacity: 1;
-            transform: scale(1.1);
+        .empty-state i { 
+            font-size: 80px; color: var(--primary); 
+            opacity: 0.3; margin-bottom: 20px; display: block;
         }
 
         .empty-state p {
-            font-size: 16px;
+            font-size: 18px; font-weight: 500;
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px;
+        .loading { 
+            text-align: center; padding: 80px 20px; 
             color: var(--text-secondary);
         }
 
-        .loading i {
-            font-size: 40px;
-            color: var(--primary);
-            animation: spin 1s linear infinite;
+        .loading i { 
+            font-size: 60px; color: var(--primary); 
+            animation: spin 2s linear infinite;
+            display: block; margin-bottom: 20px;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--primary);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-            z-index: 1001;
+            position: fixed; bottom: 30px; right: 30px; 
+            background: var(--primary); color: white; 
+            padding: 15px 30px; border-radius: 8px; z-index: 10000;
+            opacity: 0; transform: translateY(20px); 
+            transition: all 0.4s ease; box-shadow: var(--shadow);
         }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .toast.show { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 968px) {
-            .forum-grid {
-                grid-template-columns: 1fr;
+        .toast.error { background: #c0392b; }
+        .toast.success { background: #27ae60; }
+
+        @media (max-width: 768px) {
+            .section-header { 
+                flex-direction: column; 
+                text-align: center; 
+                gap: 20px;
+            }
+            
+            .section-info h1 { font-size: 24px; }
+            
+            .form-buttons { 
+                flex-direction: column;
             }
 
-            .sidebar {
-                position: static;
-            }
-
-            .main-content {
-                padding: 25px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-
-            .auth-section {
-                padding: 25px;
-            }
-
-            .main-content {
-                padding: 20px;
-            }
-
-            .post {
-                padding: 20px;
+            .post-header {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -523,316 +313,229 @@
             <img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg" alt="Zaratic RP">
             <span>Zaratic RP</span>
         </a>
-        <a href="index.html" class="back-btn">
+        <a href="forum.html" class="back-btn">
             <i class="fas fa-arrow-left"></i>
-            უკან
+            უკან ფორუმში
         </a>
     </header>
 
     <div class="container">
-        <!-- Authentication Section -->
-        <div id="authSection" class="auth-section">
-            <div id="loginForm">
-                <h2>შესვლა</h2>
-                <div class="auth-form">
-                    <input type="text" id="loginUsername" class="auth-input" placeholder="მომხმარებლის სახელი (შეიყვანეთ თქვენი in-game სახელი)">
-                    <input type="password" id="loginPassword" class="auth-input" placeholder="პაროლი">
-                    <button onclick="login()" class="auth-btn">შესვლა</button>
-                </div>
-                <div class="switch-auth">
-                    არ გაქვთ ანგარიში? <a onclick="showRegister()">რეგისტრაცია</a>
-                </div>
+        <div class="section-header">
+            <div class="section-info">
+                <h1 id="sectionTitle">სექციის სათაური</h1>
+                <p id="sectionDesc">სექციის აღწერილობა</p>
             </div>
-
-            <div id="registerForm" style="display: none;">
-                <h2>რეგისტრაცია</h2>
-                <div class="auth-form">
-                    <input type="text" id="regUsername" class="auth-input" placeholder="მომხმარებლის სახელი (შეიყვანეთ თქვენი in-game სახელი)">
-                    <input type="password" id="regPassword" class="auth-input" placeholder="პაროლი">
-                    <input type="password" id="regConfirmPassword" class="auth-input" placeholder="გაიმეორეთ პაროლი">
-                    <button onclick="register()" class="auth-btn">რეგისტრაცია</button>
-                </div>
-                <div class="switch-auth">
-                    უკვე გაქვთ ანგარიში? <a onclick="showLogin()">შესვლა</a>
-                </div>
+            <div class="user-badge">
+                <i class="fas fa-user"></i>
+                <span id="currentUserDisplay">სტუმარო</span>
             </div>
         </div>
 
-        <!-- Forum Content -->
-        <div id="forumContent" class="forum-content">
-            <div class="user-info">
-                <h3>მოგესალმებით, <span id="currentUser"></span>!</h3>
-                <button onclick="logout()" class="logout-btn">გამოსვლა</button>
-            </div>
-
-            <div class="forum-grid">
-                <aside class="sidebar">
-                    <h3>ფორუმის სექციები</h3>
-                    
-                    <div class="forum-category">
-                        <div class="category-title">სერვერის ინფო</div>
-                        <a href="section.html?id=rules" class="forum-item">
-                            <i class="fas fa-book"></i>
-                            სერვერის საერთო წესები
-                        </a>
-                        <a href="section.html?id=news" class="forum-item">
-                            <i class="fas fa-newspaper"></i>
-                            სერვერის სიახლეები
-                        </a>
-                        <a href="section.html?id=updates" class="forum-item">
-                            <i class="fas fa-sync-alt"></i>
-                            სერვერის განახლებები
-                        </a>
-                    </div>
-
-                    <div class="forum-category">
-                        <div class="category-title">საინფორმაციო</div>
-                        <a href="section.html?id=info" class="forum-item">
-                            <i class="fas fa-info-circle"></i>
-                            საინფორმაციო განყოფილება
-                        </a>
-                        <a href="section.html?id=suggestions" class="forum-item">
-                            <i class="fas fa-lightbulb"></i>
-                            შემოთავაზებები
-                        </a>
-                        <a href="section.html?id=events" class="forum-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            ღონისძიებები
-                        </a>
-                        <a href="section.html?id=biographies" class="forum-item">
-                            <i class="fas fa-user-edit"></i>
-                            RP ბიოგრაფიები
-                        </a>
-                    </div>
-
-                    <div class="forum-category">
-                        <div class="category-title">საჩივრები</div>
-                        <a href="section.html?id=complaints-admin" class="forum-item">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            საჩივრები ადმინისტრატორზე
-                        </a>
-                        <a href="section.html?id=complaints-player" class="forum-item">
-                            <i class="fas fa-user-times"></i>
-                            საჩივრები მოთამაშეზე
-                        </a>
-                        <a href="section.html?id=appeals" class="forum-item">
-                            <i class="fas fa-gavel"></i>
-                            სასჯელის შემცირება/შეწყალება
-                        </a>
-                    </div>
-
-                    <div class="forum-category">
-                        <div class="category-title">ვაკანსიები</div>
-                        <a href="section.html?id=vacancies-leaders" class="forum-item">
-                            <i class="fas fa-crown"></i>
-                            ვაკანსია ლიდერებზე
-                        </a>
-                        <a href="section.html?id=vacancies-admin" class="forum-item">
-                            <i class="fas fa-user-shield"></i>
-                            ვაკანსია ადმინისტრაციაზე
-                        </a>
-                        <a href="section.html?id=vacancies-partner" class="forum-item">
-                            <i class="fas fa-handshake"></i>
-                            ვაკანსია პარტნიორობაზე
-                        </a>
-                    </div>
-
-                    <div class="forum-category">
-                        <div class="category-title">ტექნიკური</div>
-                        <a href="section.html?id=donation-help" class="forum-item">
-                            <i class="fas fa-donate"></i>
-                            დახმარება დონაციაზე
-                        </a>
-                        <a href="section.html?id=tech-help" class="forum-item">
-                            <i class="fas fa-tools"></i>
-                            დახმარება ტექნიკურ საკითხებზე
-                        </a>
-                    </div>
-                </aside>
-
-                <main class="main-content" id="mainContent">
-                    <div class="forum-header">
-                        <h2>ფორუმი</h2>
-                        <p>შეარჩიეთ სექცია მენიუდან</p>
-                    </div>
-                    <div class="empty-state">
-                        <i class="fas fa-comments"></i>
-                        <p>გთხოვთ აირჩიოთ სექცია</p>
-                    </div>
-                </main>
-            </div>
-        </div>
+        <div id="postFormContainer"></div>
+        <div id="postsContainer"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Local Storage Wrapper (to simulate persistent storage)
-        const storage = {
-            async get(key) {
-                return new Promise((resolve) => {
-                    const value = localStorage.getItem(key);
-                    resolve(value ? { value } : null);
-                });
-            },
-            async set(key, value) {
-                return new Promise((resolve) => {
-                    localStorage.setItem(key, value);
-                    resolve();
-                });
-            },
-            async list(prefix) {
-                return new Promise((resolve) => {
-                    const keys = [];
-                    for (let i = 0; i < localStorage.length; i++) {
-                        const k = localStorage.key(i);
-                        if (k.startsWith(prefix)) {
-                            keys.push(k);
-                        }
-                    }
-                    resolve({ keys });
-                });
-            }
+        const KV_URL = "https://zaraticdb.jemalagegidze.workers.dev/kv";
+
+        const forumData = {
+            'rules': { title: 'სერვერის საერთო წესები', desc: 'სერვერის წესები და რეგულაციები', official: true },
+            'news': { title: 'სერვერის სიახლეები', desc: 'უახლესი სიახლეები სერვერზე', official: true },
+            'updates': { title: 'სერვერის განახლებები', desc: 'სერვერის განახლებები და ცვლილებები', official: true },
+            'info': { title: 'საინფორმაციო განყოფილება', desc: 'ზოგადი ინფორმაცია', official: false },
+            'suggestions': { title: 'შემოთავაზებები', desc: 'თქვენი შემოთავაზებები სერვერის გასაუმჯობესებლად', official: false },
+            'events': { title: 'ღონისძიებები', desc: 'სერვერის ღონისძიებები და ტურნირები', official: false },
+            'biographies': { title: 'RP ბიოგრაფიები', desc: 'მოთამაშეთა RP ბიოგრაფიები', official: false },
+            'complaints-admin': { title: 'საჩივრები ადმინზე', desc: 'საჩივრები ადმინისტრაციის წევრებზე', official: false },
+            'complaints-player': { title: 'საჩივრები მოთამაშეზე', desc: 'საჩივრები სხვა მოთამაშეებზე', official: false },
+            'appeals': { title: 'სასჯელის გასაჩივრება', desc: 'სასჯელის შემცირება/შეწყალება', official: false },
+            'vacancies-leaders': { title: 'ვაკანსია ლიდერებზე', desc: 'ლიდერის პოზიციები', official: false },
+            'vacancies-admin': { title: 'ვაკანსია ადმინზე', desc: 'ადმინისტრაციაში ვაკანსიები', official: false },
+            'vacancies-partner': { title: 'პარტნიორობა', desc: 'პარტნიორობის შეთავაზებები', official: false },
+            'donation-help': { title: 'დახმარება დონაციაზე', desc: 'დონაციასთან დაკავშირებით', official: false },
+            'tech-help': { title: 'ტექნიკური დახმარება', desc: 'ტექნიკური პრობლემები', official: false }
         };
 
-        let currentUsername = null;
-        let isAdmin = false;
+        const adminUsers = ['Zviadi Gegidze', 'Nika Georgadze'];
+        let currentUser = localStorage.getItem('forum_username') || 'სტუმარო';
+        let currentSection = new URLSearchParams(location.search).get('id') || 'rules';
+        let isLoading = false;
 
-        // Initialize
-        window.onload = async function() {
-            particlesJS('particles-js', {
-                particles: { 
-                    number: { value: 80, density: { enable: true, value_area: 800 } }, 
-                    color: { value: "#e74c3c" }, 
-                    shape: { type: "circle" }, 
-                    opacity: { value: 0.3, random: true }, 
-                    size: { value: 3, random: true }, 
-                    line_linked: { enable: true, distance: 150, color: "#e74c3c", opacity: 0.2, width: 1 }, 
-                    move: { enable: true, speed: 2 } 
+        document.getElementById('currentUserDisplay').textContent = currentUser;
+
+        // Initialize particles
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 0 },
+                opacity: { value: 0 },
+                size: { value: 0 }
+            },
+            retina_detect: true
+        });
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        function showToast(msg, type = 'success') {
+            const t = document.createElement('div');
+            t.className = `toast show ${type}`;
+            t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 4000);
+        }
+
+        async function loadPosts() {
+            if (isLoading) return;
+            isLoading = true;
+
+            const info = forumData[currentSection] || { title: currentSection, desc: '', official: false };
+            
+            document.getElementById('sectionTitle').textContent = info.title;
+            document.getElementById('sectionDesc').textContent = info.desc;
+
+            const canPost = currentUser !== 'სტუმარო' && (!info.official || adminUsers.includes(currentUser));
+
+            // Render form only once
+            if (!document.getElementById('postFormContainer').innerHTML) {
+                if (canPost) {
+                    document.getElementById('postFormContainer').innerHTML = `
+                        <div class="post-form">
+                            <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 18px;">
+                                <i class="fas fa-plus" style="margin-right: 8px;"></i> ახალი პოსტი
+                            </h3>
+                            <form id="postForm">
+                                <div class="form-group">
+                                    <label><i class="fas fa-heading" style="margin-right: 8px;"></i>სათაური</label>
+                                    <input type="text" id="postTitle" class="form-input" required placeholder="მიუთითეთ თემის სათაური">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-pen" style="margin-right: 8px;"></i>შინაარსი</label>
+                                    <textarea id="postContent" class="form-textarea" required placeholder="დაწერეთ თქვენი პოსტი..."></textarea>
+                                </div>
+                                <div class="form-buttons">
+                                    <button type="submit" class="submit-btn">
+                                        <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>გამოქვეყნება
+                                    </button>
+                                    <button type="reset" class="cancel-btn">
+                                        <i class="fas fa-times" style="margin-right: 8px;"></i>გაწმენა
+                                    </button>
+                                </div>
+                            </form>
+                        </div>`;
+                    
+                    document.getElementById('postForm').addEventListener('submit', sendPost);
                 }
-            });
-
-            // Pre-register admins if not exist
-            const admins = [
-                { username: 'Zviadi Gegidze', password: 'admin123' },
-                { username: 'Nika Georgadze', password: 'admin123' }
-            ];
-
-            for (const admin of admins) {
-                const existing = await storage.get(`user:${admin.username}`);
-                if (!existing) {
-                    await storage.set(`user:${admin.username}`, JSON.stringify({ password: admin.password, createdAt: Date.now(), role: 'admin' }));
-                }
-            }
-
-            checkAuth();
-        };
-
-        function checkAuth() {
-            const username = localStorage.getItem('forum_username');
-            if (username) {
-                currentUsername = username;
-                isAdmin = ['Zviadi Gegidze', 'Nika Georgadze'].includes(username);
-                showForum();
-            } else {
-                document.getElementById('authSection').style.display = 'block';
-            }
-        }
-
-        function showLogin() {
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('registerForm').style.display = 'none';
-        }
-
-        function showRegister() {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'block';
-        }
-
-        async function register() {
-            const username = document.getElementById('regUsername').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-
-            if (!username || !password) {
-                alert('გთხოვთ შეავსოთ ყველა ველი');
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                alert('პაროლები არ ემთხვევა');
-                return;
-            }
-
-            if (username.length < 3) {
-                alert('მომხმარებლის სახელი უნდა იყოს მინიმუმ 3 სიმბოლო');
-                return;
             }
 
             try {
-                const existingUser = await storage.get(`user:${username}`);
-                if (existingUser) {
-                    alert('ეს მომხმარებელი უკვე არსებობს');
-                    return;
+                const res = await fetch(`${KV_URL}?section=${currentSection}`, { cache: "no-store" });
+                const posts = res.ok ? await res.json() : [];
+
+                let html = '';
+
+                if (posts.length === 0) {
+                    html = `
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>ჯერ არ არის შექმნილი პოსტები ამ განყოფილებაში</p>
+                            <p style="font-size: 13px; margin-top: 10px; color: rgba(255,255,255,0.4);">
+                                პირველი იყავი, რომელიც დაწერე პოსტი!
+                            </p>
+                        </div>`;
+                } else {
+                    html = `<div class="posts-container">`;
+                    posts.forEach((p, idx) => {
+                        const date = new Date(p.timestamp).toLocaleString('ka-GE');
+                        const letter = p.author.charAt(0).toUpperCase();
+                        html += `
+                            <div class="post">
+                                <div class="post-header">
+                                    <div class="post-author">
+                                        <div class="author-avatar">${letter}</div>
+                                        <div class="author-info">
+                                            <h4>${escapeHtml(p.author)}</h4>
+                                            <div class="post-date">${date}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-title">${escapeHtml(p.title)}</div>
+                                <div class="post-content">${escapeHtml(p.content).replace(/\n/g, '<br>')}</div>
+                                <div class="post-footer">
+                                    <span>#${idx + 1}</span>
+                                </div>
+                            </div>`;
+                    });
+                    html += `</div>`;
                 }
 
-                await storage.set(`user:${username}`, JSON.stringify({ password, createdAt: Date.now() }));
-                
-                currentUsername = username;
-                isAdmin = ['Zviadi Gegidze', 'Nika Georgadze'].includes(username);
-                localStorage.setItem('forum_username', username);
-                showForum();
-            } catch (error) {
-                console.error('Registration error:', error);
-                alert('რეგისტრაციის შეცდომა');
+                document.getElementById('postsContainer').innerHTML = html;
+
+            } catch (err) {
+                document.getElementById('postsContainer').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>შეცდომა სერვერთან კავშირში</p>
+                        <p style="font-size: 13px; margin-top: 10px; color: rgba(255,255,255,0.4);">
+                            ${err.message}
+                        </p>
+                    </div>`;
             }
+
+            isLoading = false;
         }
 
-        async function login() {
-            const username = document.getElementById('loginUsername').value.trim();
-            const password = document.getElementById('loginPassword').value;
-
-            if (!username || !password) {
-                alert('გთხოვთ შეავსოთ ყველა ველი');
+        async function sendPost(e) {
+            e.preventDefault();
+            
+            if (currentUser === 'სტუმარო') {
+                showToast('გთხოვთ შეხვიდეთ სისტემაში', 'error');
                 return;
             }
 
+            const title = document.getElementById('postTitle').value.trim();
+            const content = document.getElementById('postContent').value.trim();
+            
+            if (!title || !content) {
+                showToast('გთხოვთ, შეავსოთ ყველა ველი', 'error');
+                return;
+            }
+
+            const post = { author: currentUser, title, content, timestamp: Date.now() };
+
             try {
-                const userData = await storage.get(`user:${username}`);
-                if (!userData) {
-                    alert('მომხმარებელი ვერ მოიძებნა');
-                    return;
-                }
+                const res = await fetch(KV_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ section: currentSection, post })
+                });
 
-                const user = JSON.parse(userData.value);
-                if (user.password !== password) {
-                    alert('არასწორი პაროლი');
-                    return;
+                if (res.ok) {
+                    document.getElementById('postTitle').value = '';
+                    document.getElementById('postContent').value = '';
+                    showToast('პოსტი წარმატებით გამოქვეყნდა!', 'success');
+                    setTimeout(loadPosts, 500);
+                } else {
+                    showToast('დაჭეა პოსტის გამოქვეყნება', 'error');
                 }
-
-                currentUsername = username;
-                isAdmin = ['Zviadi Gegidze', 'Nika Georgadze'].includes(username);
-                localStorage.setItem('forum_username', username);
-                showForum();
-            } catch (error) {
-                console.error('Login error:', error);
-                alert('შესვლის შეცდომა');
+            } catch (err) {
+                showToast('შეცდომა: ' + err.message, 'error');
             }
         }
 
-        function logout() {
-            currentUsername = null;
-            isAdmin = false;
-            localStorage.removeItem('forum_username');
-            document.getElementById('authSection').style.display = 'block';
-            document.getElementById('forumContent').classList.remove('active');
-            showLogin();
-        }
-
-        function showForum() {
-            document.getElementById('authSection').style.display = 'none';
-            document.getElementById('forumContent').classList.add('active');
-            document.getElementById('currentUser').textContent = currentUsername;
-        }
+        // Initial load
+        loadPosts();
+        
+        // Refresh posts every 5 seconds
+        setInterval(loadPosts, 5000);
     </script>
 </body>
 </html>
