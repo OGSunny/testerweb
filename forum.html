@@ -1,165 +1,100 @@
 <!DOCTYPE html>
 <html lang="ka">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ფორუმი • Zaratic Role Play</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700;900&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        :root{--primary:#e74c3c;--glass:rgba(15,20,40,0.92);--border:rgba(231,76,60,0.4);--text:#fff;--text2:rgba(255,255,255,0.85);--shadow:0 8px 32px rgba(0,0,0,0.37);}
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Noto Sans Georgian',sans-serif;background:#000;color:var(--text);min-height:100vh;overflow-x:hidden;}
-        #particles-js{position:fixed;width:100%;height:100%;top:0;left:0;z-index:-2;background:radial-gradient(ellipse at top,#1a1f3a 0%,#000 70%);}
-        .glow-orbs{position:fixed;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:hidden;}
-        .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.25;animation:float 22s ease-in-out infinite;}
-        .orb-1{width:600px;height:600px;background:var(--primary);top:-20%;left:10%;}
-        .orb-2{width:500px;height:500px;background:#8e44ad;top:70%;right:5%;animation-delay:7s;}
-        .orb-3{width:400px;height:400px;background:#ff6b57;bottom:-15%;left:40%;animation-delay:14s;}
-        @keyframes float{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(60px,-60px) scale(1.1);}}
-        header{position:fixed;top:0;width:100%;padding:18px 5%;background:var(--glass);backdrop-filter:blur(30px);border-bottom:1px solid var(--border);z-index:1000;display:flex;justify-content:space-between;align-items:center;}
-        .logo{display:flex;align-items:center;gap:14px;font-size:28px;font-weight:900;color:white;text-decoration:none;}
-        .logo img{width:60px;height:60px;border-radius:50%;box-shadow:0 0 15px var(--primary);}
-        .user-profile{position:relative;display:flex;align-items:center;gap:12px;cursor:pointer;}
-        .user-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#ff6b57);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px;}
-        .dropdown{position:absolute;top:60px;right:0;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:12px;min-width:200px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transition:all 0.3s;}
-        .user-profile:hover .dropdown{opacity:1;visibility:visible;}
-        .dropdown a{display:block;padding:14px 20px;color:var(--text2);text-decoration:none;border-bottom:1px solid var(--border);}
-        .dropdown a:last-child{border:none;}
-        .dropdown a:hover{background:rgba(231,76,60,0.2);color:white;}
-        .hero{text-align:center;padding:140px 20px 60px;}
-        .hero h1{font-size:52px;background:linear-gradient(90deg,var(--primary),#ff6b57);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;}
-        .container{max-width:1400px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 320px;gap:35px;}
-        .section-title{font-size:28px;color:var(--primary);margin:40px 0 25px;position:relative;padding-left:20px;}
-        .section-title::before{content:'';position:absolute;left:0;top:50%;width:6px;height:30px;background:var(--primary);border-radius:3px;transform:translateY(-50%);}
-        .categories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;}
-        .category-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all 0.4s;cursor:pointer;position:relative;overflow:hidden;}
-        .category-card:hover{transform:translateY(-8px);border-color:var(--primary);box-shadow:0 15px 35px rgba(231,76,60,0.25);}
-        .category-header{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
-        .category-icon{width:56px;height:56px;background:rgba(231,76,60,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;transition:0.4s;}
-        .category-card:hover .category-icon{background:var(--primary);transform:rotate(12deg);}
-        .category-title{font-size:21px;font-weight:700;display:flex;align-items:center;gap:10px;}
-        .lock-icon{color:#e67e22;font-size:18px;}
-        .category-desc{color:var(--text2);font-size:14.5px;margin-bottom:16px;}
-        .category-stats{display:flex;justify-content:space-between;font-size:13px;color:var(--text2);opacity:0.9;}
-        .last-post{margin-top:10px;font-size:13px;color:var(--text2);}
-        .sidebar-widget{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:30px;box-shadow:var(--shadow);}
-        .widget-title{font-size:20px;color:var(--primary);margin-bottom:18px;}
-        footer{margin-top:80px;padding:40px 20px;text-align:center;color:var(--text2);font-size:14px;}
-        .toast{position:fixed;bottom:30px;right:30px;background:var(--primary);color:white;padding:16px 28px;border-radius:12px;box-shadow:var(--shadow);z-index:10000;opacity:0;transform:translateY(20px);transition:all 0.4s;}
-        .toast.show{opacity:1;transform:translateY(0);}
-        @media(max-width:1024px){.container{grid-template-columns:1fr;}}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zaratic RP • ფორუმი</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root { --red: #e74c3c; --dark: #0f0f0f; --glass: rgba(20,20,30,0.9); --border: rgba(231,76,60,0.3); }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Noto Sans Georgian', sans-serif; background:#000; color:#eee; min-height:100vh; font-size:14px; line-height:1.5; }
+    header { position:fixed; top:0; left:0; width:100%; padding:12px 20px; background:var(--glass); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); z-index:1000; display:flex; justify-content:space-between; align-items:center; }
+    .logo { display:flex; align-items:center; gap:10px; font-weight:600; font-size:18px; color:white; text-decoration:none; }
+    .logo img { width:36px; height:36px; border-radius:50%; }
+    .user { display:flex; align-items:center; gap:10px; cursor:pointer; }
+    .avatar { width:36px; height:36px; background:var(--red); border-radius:50%; display:grid; place-items:center; font-weight:bold; }
+    .container { max-width:1100px; margin:70px auto 20px; padding:0 15px; display:grid; grid-template-columns:1fr 280px; gap:20px; }
+    .section h2 { font-size:16px; color:var(--red); margin:25px 0 12px; font-weight:600; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+    .card { background:var(--glass); border:1px solid var(--border); border-radius:8px; padding:14px; transition:0.2s; cursor:pointer; }
+    .card:hover { border-color:var(--red); transform:translateY(-2px); }
+    .card h3 { font-size:15px; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+    .lock { color:#e67e22; font-size:13px; }
+    .card p { font-size:13px; color:#ccc; margin-bottom:8px; }
+    .stats { font-size:12px; color:#999; display:flex; justify-content:space-between; }
+    .sidebar { background:var(--glass); border:1px solid var(--border); border-radius:8px; padding:16px; height:fit-content; position:sticky; top:70px; }
+    .sidebar h3 { font-size:14px; color:var(--red); margin-bottom:10px; }
+    .stat { font-size:13px; margin:8px 0; color:#ccc; }
+    footer { text-align:center; padding:20px; color:#666; font-size:12px; }
+    @media (max-width:900px) { .container { grid-template-columns:1fr; } .sidebar { position:static; } }
+  </style>
 </head>
 <body>
-    <div class="glow-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
-    <div id="particles-js"></div>
+  <header>
+    <a href="forum.html" class="logo">
+      <img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg" alt="Zaratic RP">
+      Zaratic RP
+    </a>
+    <div class="user" onclick="location.href='profile.html'">
+      <div class="avatar" id="avatar">Z</div>
+      <span id="username">Guest</span>
+    </div>
+  </header>
 
-    <header>
-        <a href="forum.html" class="logo"><img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg" alt="Logo"> Zaratic RP</a>
-        <div class="user-profile">
-            <div class="user-avatar" id="userAvatar">Z</div>
-            <span id="userName">მომხმარებელი</span>
-            <div class="dropdown">
-                <a href="profile.html"><i class="fas fa-user"></i> პროფილი</a>
-                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> გამოსვლა</a>
-            </div>
+  <div class="container">
+    <main>
+      <div class="section"><h2>სერვერის ინფორმაცია</h2>
+        <div class="grid">
+          <div class="card" data-id="rules"><h3>წესები <i class="fas fa-lock lock"></i></h3><p>ოფიციალური წესები</p><div class="stats"><span id="rules-count">0 პოსტი</span></div></div>
+          <div class="card" data-id="news"><h3>სიახლეები <i class="fas fa-lock lock"></i></h3><p>ადმინის განცხადებები</p><div class="stats"><span id="news-count">0</span></div></div>
+          <div class="card" data-id="updates"><h3>განახლებები <i class="fas fa-lock lock"></i></h3><p>სერვერის ცვლილებები</p><div class="stats"><span id="updates-count">0</span></div></div>
         </div>
-    </header>
+      </div>
 
-    <div class="hero">
-        <h1>Zaratic Role Play ფორუმი</h1>
-        <p>შეუერთდი საზოგადოებას • განიხილე • შექმენი</p>
-    </div>
+      <div class="section"><h2>საჩივრები & ვაკანსიები</h2>
+        <div class="grid">
+          <div class="card" data-id="complaints-admin"><h3>საჩივარი ადმინზე</h3><p id="ca-count">0</p></div>
+          <div class="card" data-id="complaints-player"><h3>საჩივარი მოთამაშეზე</h3><p id="cp-count">0</p></div>
+          <div class="card" data-id="vacancies-leaders"><h3>ლიდერები</h3><p id="vl-count">0</p></div>
+        </div>
+      </div>
+    </main>
 
-    <div class="container">
-        <main>
-            <h2 class="section-title">სერვერის ინფორმაცია</h2>
-            <div class="categories-grid">
-                <div class="category-card" data-id="rules"><div class="category-header"><div class="category-icon"><i class="fas fa-gavel"></i></div><h3 class="category-title">წესები <i class="fas fa-lock lock-icon"></i></h3></div><p class="category-desc">სერვერის ოფიციალური წესები</p><div class="category-stats"><span>პოსტები: <span class="post-count">0</span></span></div></div>
-                <div class="category-card" data-id="news"><div class="category-header"><div class="category-icon"><i class="fas fa-bullhorn"></i></div><h3 class="category-title">სიახლეები <i class="fas fa-lock lock-icon"></i></h3></div><p class="category-desc">ადმინისტრაციის განცხადებები</p><div class="category-stats"><span>პოსტები: <span class="post-count">0</span></span></div></div>
-                <div class="category-card" data-id="updates"><div class="category-header"><div class="category-icon"><i class="fas fa-sync-alt"></i></div><h3 class="category-title">განახლებები <i class="fas fa-lock lock-icon"></i></h3></div><p class="category-desc">სერვერის განახლებები</p><div class="category-stats"><span>პოსტები: <span class="post-count">0</span></span></div></div>
-            </div>
+    <aside class="sidebar">
+      <h3>სტატისტიკა</h3>
+      <div class="stat">პოსტები: <strong id="total">0</strong></div>
+      <div class="stat">ონლაინ: <strong id="online">0</strong></div>
+    </aside>
+  </div>
 
-            <h2 class="section-title">ინფორმაცია</h2>
-            <div class="categories-grid">
-                <div class="category-card" data-id="info"><div class="category-header"><div class="category-icon"><i class="fas fa-info-circle"></i></div><h3 class="category-title">ინფორმაცია</h3></div><p class="category-desc">სერვერის შესახებ</p></div>
-                <div class="category-card" data-id="suggestions"><div class="category-header"><div class="category-icon"><i class="fas fa-lightbulb"></i></div><h3 class="category-title">წინადადებები</h3></div><p class="category-desc">შენი იდეები</p></div>
-                <div class="category-card" data-id="events"><div class="category-header"><div class="category-icon"><i class="fas fa-calendar-alt"></i></div><h3 class="category-title">ივენთები</h3></div><p class="category-desc">ღონისძიებები</p></div>
-                <div class="category-card" data-id="biographies"><div class="category-header"><div class="category-icon"><i class="fas fa-book-open"></i></div><h3 class="category-title">ბიოგრაფიები</h3></div><p class="category-desc">RP პერსონაჟები</p></div>
-            </div>
+  <footer>© 2025 Zaratic Role Play</footer>
 
-            <h2 class="section-title">საჩივრები</h2>
-            <div class="categories-grid">
-                <div class="category-card" data-id="complaints-admin"><div class="category-header"><div class="category-icon"><i class="fas fa-user-shield"></i></div><h3 class="category-title">საჩივარი ადმინზე</h3></div></div>
-                <div class="category-card" data-id="complaints-player"><div class="category-header"><div class="category-icon"><i class="fas fa-users"></i></div><h3 class="category-title">საჩივარი მოთამაშეზე</h3></div></div>
-                <div class="category-card" data-id="appeals"><div class="category-header"><div class="category-icon"><i class="fas fa-gavel"></i></div><h3 class="category-title">აპელაციები</h3></div></div>
-            </div>
+  <script>
+    const worker = 'https://data.jemalagegidze.workers.dev';
+    const user = localStorage.getItem('username');
+    if (!user) location.href = 'login.html';
+    document.getElementById('username').textContent = user;
+    document.getElementById('avatar').textContent = user[0].toUpperCase();
 
-            <h2 class="section-title">ვაკანსიები</h2>
-            <div class="categories-grid">
-                <div class="category-card" data-id="vacancies-leaders"><div class="category-header"><div class="category-icon"><i class="fas fa-crown"></i></div><h3 class="category-title">ლიდერები</h3></div></div>
-                <div class="category-card" data-id="vacancies-admin"><div class="category-header"><div class="category-icon"><i class="fas fa-shield-alt"></i></div><h3 class="category-title">ადმინისტრაცია</h3></div></div>
-                <div class="category-card" data-id="vacancies-partner"><div class="category-header"><div class="category-icon"><i class="fas fa-handshake"></i></div><h3 class="category-title">პარტნიორები</h3></div></div>
-            </div>
+    const sections = ['rules','news','updates','complaints-admin','complaints-player','vacancies-leaders'];
+    async function load() {
+      let total = 0;
+      for (const s of sections) {
+        const res = await fetch(`${worker}/?section=${s}`);
+        const posts = await res.json();
+        total += posts.length;
+        const el = document.getElementById(s + '-count') || document.querySelector(`[data-id="${s}"] p`);
+        el.innerHTML = posts.length + (posts.length === 1 ? ' პოსტი' : ' პოსტი');
+      }
+      document.getElementById('total').textContent = total;
+      document.getElementById('online').textContent = Math.floor(Math.random()*30)+10;
+    }
+    load(); setInterval(load,30000);
 
-            <h2 class="section-title">ტექნიკური</h2>
-            <div class="categories-grid">
-                <div class="category-card" data-id="donation-help"><div class="category-header"><div class="category-icon"><i class="fas fa-donate"></i></div><h3 class="category-title">დონატის დახმარება</h3></div></div>
-                <div class="category-card" data-id="tech-help"><div class="category-header"><div class="category-icon"><i class="fas fa-tools"></i></div><h3 class="category-title">ტექ. დახმარება</h3></div></div>
-            </div>
-        </main>
-
-        <aside>
-            <div class="sidebar-widget">
-                <h3 class="widget-title">სტატისტიკა</h3>
-                <p>პოსტები: <strong id="total-posts">0</strong></p>
-                <p>ონლაინ: <strong id="online-count">0</strong></p>
-            </div>
-            <div class="sidebar-widget">
-                <h3 class="widget-title">აქტიური მომხმარებლები</h3>
-                <div id="active-users"></div>
-            </div>
-        </aside>
-    </div>
-
-    <footer>© 2025 Zaratic Role Play • ყველა უფლება დაცულია</footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script>
-        const workerUrl = 'https://data.jemalagegidze.workers.dev';
-        let currentUser = localStorage.getItem('username');
-        if (!currentUser) location.href = 'login.html';
-        document.getElementById('userName').textContent = currentUser;
-        document.getElementById('userAvatar').textContent = currentUser[0].toUpperCase();
-
-        particlesJS('particles-js', {particles:{number:{value:90},color:{value:'#e74c3c'},opacity:{value:0.4,random:true},size:{value:3,random:true},line_linked:{enable:true,distance:140,color:'#e74c3c',opacity:0.2,width:1},move:{enable:true,speed:1.5}},interactivity:{events:{onhover:{enable:true,mode:'repulse'}}}});
-
-        const sections = ['rules','news','updates','info','suggestions','events','biographies','complaints-admin','complaints-player','appeals','vacancies-leaders','vacancies-admin','vacancies-partner','donation-help','tech-help'];
-        const contributors = {};
-
-        async function loadStats() {
-            let total = 0;
-            for (const s of sections) {
-                const res = await fetch(`${workerUrl}/posts?section=${s}`);
-                const posts = await res.json();
-                total += posts.length;
-                posts.forEach(p => contributors[p.author] = (contributors[p.author]||0)+1);
-                const card = document.querySelector(`[data-id="${s}"]`);
-                if(card){card.querySelector('.post-count').textContent = posts.length;}
-            }
-            document.getElementById('total-posts').textContent = total;
-            document.getElementById('online-count').textContent = Math.floor(Math.random()*40)+15;
-            const top = Object.entries(contributors).sort((a,b)=>b[1]-a[1]).slice(0,5);
-            document.getElementById('active-users').innerHTML = top.map(([n,c])=>`<div style="margin:8px 0">${n} — <strong>${c}</strong></div>`).join('');
-        }
-        loadStats(); setInterval(loadStats,30000);
-
-        document.querySelectorAll('.category-card').forEach(c=>c.onclick=()=>location.href=`section.html?id=${c.dataset.id}`);
-        function logout(){localStorage.clear();location.href='login.html';}
-
-        function showToast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.classList.add('show'),100);setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),500);},3000);}
-    </script>
+    document.querySelectorAll('.card').forEach(c => c.onclick = () => location.href = `section.html?id=${c.dataset.id}`);
+  </script>
 </body>
 </html>
