@@ -5,211 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>შესვლა • Zaratic Role Play</title>
     <link rel="icon" href="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        :root {
-            --bg: #0a0a0f;
-            --card: rgba(20, 20, 35, 0.95);
-            --accent: #e91e63;
-            --accent-glow: #ff4081;
-            --text: #ffffff;
-            --text-light: #cccccc;
-            --border: rgba(233, 30, 99, 0.3);
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Noto Sans Georgian', sans-serif;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a0033 100%);
-            color: var(--text);
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            overflow: hidden;
-        }
-        .bg-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(233,30,99,0.4) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: 0;
-        }
-        .login-box {
-            position: relative;
-            z-index: 10;
-            width: 380px;
-            background: var(--card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 60px rgba(233,30,99,0.2);
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        .logo {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 30px var(--accent-glow);
-        }
-        h1 {
-            text-align: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
-            margin-bottom: 30px;
-            background: linear-gradient(90deg, #e91e63, #ff4081);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        input {
-            width: 100%;
-            padding: 14px 18px;
-            margin: 12px 0;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: white;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
-        input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(233,30,99,0.4);
-        }
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(45deg, var(--accent), #ff4081);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(233,30,99,0.5);
-        }
-        button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        button:active::after {
-            width: 300px;
-            height: 300px;
-        }
-        .switch {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        .switch a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .error {
-            color: #ff5252;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-            padding: 8px;
-            background: rgba(255,82,82,0.1);
-            border-radius: 8px;
-        }
-        .remember {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-light);
-            font-size: 13px;
-            margin: 10px 0;
-        }
+        :root{--bg:#0a0a0f;--card:rgba(20,20,35,.96);--accent:#e91e63;--glow:#ff4081;--border:rgba(233,30,99,.3)}*{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Noto Sans Georgian',sans-serif;background:linear-gradient(135deg,#0a0a0f,#1a0033);color:#fff;min-height:100vh;display:grid;place-items:center;overflow:hidden}
+        .glow{position:fixed;width:700px;height:700px;background:radial-gradient(circle,rgba(233,30,99,.4),transparent 70%);filter:blur(120px);top:50%;left:50%;transform:translate(-50%,-50%)}
+        .box{position:relative;background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:40px 35px;width:390px;box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 80px rgba(233,30,99,.3);animation:float 7s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+        .logo{width:100px;height:100px;border-radius:50%;margin:0 auto 25px;border:4px solid var(--accent);box-shadow:0 0 40px var(--glow)}
+        h1{text-align:center;font-family:'Orbitron',sans-serif;font-size:30px;margin-bottom:30px;background:linear-gradient(90deg,var(--accent),var(--glow));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        input{width:100%;padding:15px 18px;margin:12px 0;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;color:#fff;font-size:15px;transition:.3s}
+        input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 25px rgba(233,30,99,.5)}
+        button{width:100%;padding:16px;background:linear-gradient(45deg,var(--accent),var(--glow));border:none;border-radius:12px;color:#fff;font-weight:600;font-size:16px;cursor:pointer;margin-top:20px;transition:.4s;position:relative;overflow:hidden}
+        button:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(233,30,99,.6)}
+        button:active::after{content:'';position:absolute;width:300px;height:300px;background:rgba(255,255,255,.3);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);animation:ripple .6s ease-out}
+        @keyframes ripple{to{width:0;height:0;opacity:0}}
+        .switch{text-align:center;margin-top:25px;font-size:14px}
+        .switch a{color:var(--accent);font-weight:600;cursor:pointer}
+        .error{color:#ff5252;text-align:center;margin-top:15px;padding:10px;background:rgba(255,82,82,.1);border-radius:8px;font-size:14px}
+        .remember{display:flex;align-items:center;gap:8px;color:#ccc;font-size:13px;margin:10px 0}
     </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
-    <div class="login-box">
+    <div class="glow"></div>
+    <div class="box">
         <img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg" class="logo">
         <h1 id="title">შესვლა</h1>
-        <form id="authForm">
+        <form id="form">
             <input type="text" id="username" placeholder="მომხმარებელი" required minlength="3">
             <input type="password" id="password" placeholder="პაროლი" required minlength="4">
-            <label class="remember"><input type="checkbox" id="remember"> დამახსოვრება</label>
-            <button type="submit" id="submitBtn">შესვლა</button>
+            <label class="remember"><input type="checkbox"> დამახსოვრება</label>
+            <button type="submit" id="btn">შესვლა</button>
         </form>
-        <div class="switch">არ გაქვს ანგარიში? <a id="toggleMode">რეგისტრაცია</a></div>
-        <div class="error" id="errorMsg"></div>
+        <div class="switch">არ გაქვს ანგარიში? <a id="toggle">რეგისტრაცია</a></div>
+        <div class="error" id="error"></div>
     </div>
 
     <script>
-        const WORKER_URL = 'https://data.jemalagegidze.workers.dev';
-        let isLogin = true;
+        const worker = 'https://data.jemalagegidze.workers.dev';
+        let login = true;
+        if(localStorage.username) location.href='forum.html';
 
-        if (localStorage.getItem('username')) {
-            location.href = 'forum.html';
-        }
-
-        document.getElementById('toggleMode').onclick = () => {
-            isLogin = !isLogin;
-            document.getElementById('title').textContent = isLogin ? 'შესვლა' : 'რეგისტრაცია';
-            document.getElementById('submitBtn').textContent = isLogin ? 'შესვლა' : 'რეგისტრაცია';
-            document.querySelector('.switch').innerHTML = isLogin 
-                ? 'არ გაქვს ანგარიში? <a id="toggleMode">რეგისტრაცია</a>'
-                : 'უკვე გაქვს ანგარიში? <a id="toggleMode">შესვლა</a>';
-            document.getElementById('errorMsg').textContent = '';
-            document.getElementById('toggleMode').onclick = arguments.callee;
+        document.getElementById('toggle').onclick=()=>{login=!login;
+            document.getElementById('title').textContent=login?'შესვლა':'რეგისტრაცია';
+            document.getElementById('btn').textContent=login?'შესვლა':'რეგისტრაცია';
+            document.querySelector('.switch').innerHTML=login?'არ გაქვს ანგარიში? <a id="toggle">რეგისტრაცია</a>':'უკვე გაქვს? <a id="toggle">შესვლა</a>';
+            document.getElementById('error').textContent='';
         };
 
-        document.getElementById('authForm').onsubmit = async (e) => {
+        document.getElementById('form').onsubmit=async e=>{
             e.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            const btn = document.getElementById('submitBtn');
-            const error = document.getElementById('errorMsg');
-
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> მიმდინარეობს...';
-
-            try {
-                const res = await fetch(WORKER_URL + (isLogin ? '/login' : '/register'), {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-                const data = await res.json();
-
-                if (!res.ok) throw new Error(data.error || 'უცნობი შეცდომა');
-
-                localStorage.setItem('username', username);
-                setTimeout(() => location.href = 'forum.html', 500);
-            } catch (err) {
-                error.textContent = err.message;
-            } finally {
-                btn.disabled = false;
-                btn.textContent = isLogin ? 'შესვლა' : 'რეგისტრაცია';
+            const u=document.getElementById('username').value.trim();
+            const p=document.getElementById('password').value;
+            const btn=document.getElementById('btn');
+            btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> მიმდინარეობს...';
+            try{
+                const res=await fetch(worker+(login?'/login':'/register'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,password:p})});
+                const data=await res.json();
+                if(!res.ok) throw new Error(data.error||'შეცდომა');
+                localStorage.username=u;
+                location.href='forum.html';
+            }catch(err){
+                document.getElementById('error').textContent=err.message;
+            }finally{
+                btn.disabled=false; btn.textContent=login?'შესვლა':'რეგისტრაცია';
             }
         };
     </script>
