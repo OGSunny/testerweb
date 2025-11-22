@@ -1,3 +1,4 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="ka">
 <head>
@@ -5,26 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>შესვლა • Zaratic Role Play</title>
     <link rel="icon" href="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        :root{--bg:#0a0a0f;--card:rgba(20,20,35,.96);--accent:#e91e63;--glow:#ff4081;--border:rgba(233,30,99,.3)}*{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Noto Sans Georgian',sans-serif;background:linear-gradient(135deg,#0a0a0f,#1a0033);color:#fff;min-height:100vh;display:grid;place-items:center;overflow:hidden}
-        .glow{position:fixed;width:700px;height:700px;background:radial-gradient(circle,rgba(233,30,99,.4),transparent 70%);filter:blur(120px);top:50%;left:50%;transform:translate(-50%,-50%)}
-        .box{position:relative;background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:40px 35px;width:390px;box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 80px rgba(233,30,99,.3);animation:float 7s ease-in-out infinite}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-        .logo{width:100px;height:100px;border-radius:50%;margin:0 auto 25px;border:4px solid var(--accent);box-shadow:0 0 40px var(--glow)}
-        h1{text-align:center;font-family:'Orbitron',sans-serif;font-size:30px;margin-bottom:30px;background:linear-gradient(90deg,var(--accent),var(--glow));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        input{width:100%;padding:15px 18px;margin:12px 0;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;color:#fff;font-size:15px;transition:.3s}
-        input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 25px rgba(233,30,99,.5)}
-        button{width:100%;padding:16px;background:linear-gradient(45deg,var(--accent),var(--glow));border:none;border-radius:12px;color:#fff;font-weight:600;font-size:16px;cursor:pointer;margin-top:20px;transition:.4s;position:relative;overflow:hidden}
-        button:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(233,30,99,.6)}
-        button:active::after{content:'';position:absolute;width:300px;height:300px;background:rgba(255,255,255,.3);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);animation:ripple .6s ease-out}
-        @keyframes ripple{to{width:0;height:0;opacity:0}}
+        :root{--bg:#0a0a10;--card:rgba(25,25,45,.97);--accent:#e91e63;--glow:rgba(233,30,99,.25);--border:rgba(233,30,99,.3);--text:#fff;--muted:#bbb}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Noto Sans Georgian',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:grid;place-items:center}
+        .glow{position:fixed;width:800px;height:800px;background:radial-gradient(circle,var(--glow),transparent 70%);filter:blur(140px);top:50%;left:50%;transform:translate(-50%,-50%)}
+        .box{background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:45px 40px;width:400px;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+        .logo{width:110px;height:110px;border-radius:50%;margin:0 auto 25px;border:4px solid var(--accent);box-shadow:0 0 40px var(--glow)}
+        h1{text-align:center;font-size:32px;margin-bottom:30px;color:var(--accent)}
+        input{width:100%;padding:16px 20px;margin:12px 0;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;color:#fff;font-size:15px;transition:.3s}
+        input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 20px var(--glow)}
+        button{width:100%;padding:16px;background:var(--accent);border:none;border-radius:12px;color:#fff;font-weight:600;font-size:16px;cursor:pointer;margin-top:20px;transition:.3s}
+        button:hover{background:#ff4081;transform:translateY(-2px)}
+        button:disabled{opacity:.6;cursor:not-allowed}
         .switch{text-align:center;margin-top:25px;font-size:14px}
-        .switch a{color:var(--accent);font-weight:600;cursor:pointer}
+        .switch a{color:var(--accent);cursor:pointer;font-weight:600}
         .error{color:#ff5252;text-align:center;margin-top:15px;padding:10px;background:rgba(255,82,82,.1);border-radius:8px;font-size:14px}
-        .remember{display:flex;align-items:center;gap:8px;color:#ccc;font-size:13px;margin:10px 0}
+        .remember{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;margin:10px 0}
     </style>
 </head>
 <body>
@@ -44,13 +44,14 @@
 
     <script>
         const worker = 'https://data.jemalagegidze.workers.dev';
-        let login = true;
-        if(localStorage.username) location.href='forum.html';
+        let isLogin = true;
+        if(localStorage.getItem('username')) location.href='forum.html';
 
-        document.getElementById('toggle').onclick=()=>{login=!login;
-            document.getElementById('title').textContent=login?'შესვლა':'რეგისტრაცია';
-            document.getElementById('btn').textContent=login?'შესვლა':'რეგისტრაცია';
-            document.querySelector('.switch').innerHTML=login?'არ გაქვს ანგარიში? <a id="toggle">რეგისტრაცია</a>':'უკვე გაქვს? <a id="toggle">შესვლა</a>';
+        document.getElementById('toggle').onclick=()=>{
+            isLogin=!isLogin;
+            document.getElementById('title').textContent=isLogin?'შესვლა':'რეგისტრაცია';
+            document.getElementById('btn').textContent=isLogin?'შესვლა':'რეგისტრაცია';
+            document.querySelector('.switch').innerHTML=isLogin?'არ გაქვს ანგარიში? <a id="toggle">რეგისტრაცია</a>':'უკვე გაქვს? <a id="toggle">შესვლა</a>';
             document.getElementById('error').textContent='';
         };
 
@@ -61,15 +62,15 @@
             const btn=document.getElementById('btn');
             btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> მიმდინარეობს...';
             try{
-                const res=await fetch(worker+(login?'/login':'/register'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,password:p})});
+                const res=await fetch(worker+(isLogin?'/login':'/register'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,password:p})});
                 const data=await res.json();
                 if(!res.ok) throw new Error(data.error||'შეცდომა');
-                localStorage.username=u;
+                localStorage.setItem('username',u);
                 location.href='forum.html';
             }catch(err){
                 document.getElementById('error').textContent=err.message;
             }finally{
-                btn.disabled=false; btn.textContent=login?'შესვლა':'რეგისტრაცია';
+                btn.disabled=false; btn.textContent=isLogin?'შესვლა':'რეგისტრაცია';
             }
         };
     </script>
