@@ -139,16 +139,6 @@
             font-family: 'Noto Sans Georgian', sans-serif;
         }
 
-        .admin-btn {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .admin-btn:hover {
-            background-color: #dc2626;
-            transform: translateY(-2px);
-        }
-
         .player-btn {
             background-color: var(--primary-color);
             color: white;
@@ -526,17 +516,6 @@
             }
         }
 
-        /* Admin Badge */
-        .admin-badge {
-            background: linear-gradient(45deg, #ef4444, #f97316);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 8px;
-        }
-
         /* Pinned Post Indicator */
         .pinned-indicator {
             background: linear-gradient(45deg, #f59e0b, #eab308);
@@ -565,7 +544,6 @@
                 <a href="#" class="nav-link">დახმარება</a>
             </nav>
             <div class="auth-buttons">
-                <button class="auth-btn admin-btn" onclick="openModal('admin')">ადმინის შესვლა</button>
                 <button class="auth-btn player-btn" onclick="openModal('player')">მოთამაშის შესვლა</button>
             </div>
         </div>
@@ -580,7 +558,7 @@
             <div class="category-card" onclick="location.href='#'">
                 <div class="category-header">
                     <div>
-                        <h2 class="category-title">სერვერის ინფორმაცია <span class="admin-badge">ადმინი</span></h2>
+                        <h2 class="category-title">სერვერის ინფორმაცია</h2>
                         <p class="category-english">(Server Info)</p>
                     </div>
                     <div class="post-count">0</div>
@@ -703,53 +681,17 @@
                     <span>თემები: 0</span>
                 </div>
             </div>
-
-            <!-- Category 9 -->
-            <div class="category-card" onclick="location.href='#'">
-                <div class="category-header">
-                    <div>
-                        <h2 class="category-title">საჩივრები ადმინზე <span class="admin-badge">ადმინი</span></h2>
-                        <p class="category-english">(Admin Complaints)</p>
-                    </div>
-                    <div class="post-count">0</div>
-                </div>
-                <p class="category-description">ადმინების მოქმედებების შესახებ საჩივრების ადგილი.</p>
-                <div class="category-stats">
-                    <span>ბოლო პოსტი: არ არის</span>
-                    <span>თემები: 0</span>
-                </div>
-            </div>
         </div>
 
         <!-- Show more categories would be here -->
         <div style="text-align: center; margin: 32px 0;">
             <button class="submit-btn" style="max-width: 300px; margin: 0 auto;">
-                ნახე ყველა კატეგორია (19)
+                ნახე ყველა კატეგორია (8)
             </button>
         </div>
     </main>
 
     <!-- Login Modals -->
-    <div class="modal-overlay" id="adminModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">ადმინის შესვლა</h2>
-                <button class="close-modal" onclick="closeModal('admin')">&times;</button>
-            </div>
-            <form id="adminLoginForm">
-                <div class="form-group">
-                    <label for="adminUsername" class="form-label">მომხმარებლის სახელი</label>
-                    <input type="text" id="adminUsername" class="form-input" placeholder="შეიყვანეთ მომხმარებლის სახელი" required>
-                </div>
-                <div class="form-group">
-                    <label for="adminPassword" class="form-label">პაროლი</label>
-                    <input type="password" id="adminPassword" class="form-input" placeholder="შეიყვანეთ პაროლი" required>
-                </div>
-                <button type="submit" class="submit-btn">შესვლა</button>
-            </form>
-        </div>
-    </div>
-
     <div class="modal-overlay" id="playerModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -818,7 +760,7 @@
 
         // Close modal when clicking outside
         window.addEventListener('click', function(event) {
-            const modals = ['adminModal', 'playerModal'];
+            const modals = ['playerModal'];
             modals.forEach(modalId => {
                 const modal = document.getElementById(modalId);
                 if (modal.classList.contains('active') && event.target === modal) {
@@ -828,17 +770,6 @@
         });
 
         // Form submission handling
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('adminUsername').value;
-            const password = document.getElementById('adminPassword').value;
-            
-            // In a real app, this would call the KV API
-            alert(`ადმინის შესვლა:\nმომხმარებელი: ${username}\nპაროლი: ${'*'.repeat(password.length)}`);
-            
-            closeModal('admin');
-        });
-
         document.getElementById('playerLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('playerUsername').value;
