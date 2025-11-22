@@ -1,358 +1,145 @@
-<!-- section.html -->
 <!DOCTYPE html>
 <html lang="ka">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>სექცია • Zaratic RP</title>
+    <title>სექცია • Zaratic Role Play</title>
     <link rel="icon" href="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #121218;
-            --bg-card: #1a1a24;
-            --bg-glass: rgba(20, 20, 30, 0.92);
-            --accent: #e91e63;
-            --accent-hover: #f50057;
-            --accent-light: rgba(233, 30, 99, 0.2);
-            --border: rgba(233, 30, 99, 0.25);
-            --border-hover: rgba(233, 30, 99, 0.5);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #707070;
-            --success: #4caf50;
-            --warning: #ff9800;
-            --error: #f44336;
-            --shadow: 0 4px 12px rgba(0,0,0,0.3);
-            --transition: all 0.2s ease;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Noto Sans Georgian', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; font-size: 14px; }
-        header { position: fixed; top: 0; width: 100%; padding: 12px 20px; background: var(--bg-glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-        .logo { display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-weight: 700; font-size: 18px; }
-        .logo img { width: 36px; height: 36px; border-radius: 50%; }
-        .back { color: var(--text-primary); text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 5px; }
-        .back:hover { color: var(--accent); }
-        .container { max-width: 1100px; margin: 70px auto 20px; padding: 0 15px; display: grid; grid-template-columns: 240px 1fr; gap: 20px; }
-        .sidebar { background: var(--bg-glass); border: 1px solid var(--border); border-radius: 8px; padding: 16px; position: sticky; top: 70px; height: fit-content; }
-        .sidebar a { display: block; padding: 8px 0; color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: var(--transition); }
-        .sidebar a:hover, .sidebar a.active { color: var(--accent); }
-        .main { background: var(--bg-glass); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
-        .breadcrumb { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
-        .breadcrumb a { color: var(--text-secondary); }
-        .breadcrumb a:hover { color: var(--accent); }
-        h1 { font-size: 18px; color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
-        #postForm { margin-bottom: 20px; display: none; }
-        #postForm.show { display: block; }
-        input, textarea { width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 10px; color: var(--text-primary); margin: 8px 0; font-family: inherit; font-size: 13px; transition: var(--transition); }
-        input:focus, textarea:focus { border-color: var(--border-hover); outline: none; }
-        textarea { min-height: 120px; resize: vertical; }
-        .btns { display: flex; gap: 8px; }
-        button { padding: 8px 14px; background: var(--accent); color: var(--text-primary); border: none; border-radius: 6px; cursor: pointer; font-size: 13px; transition: var(--transition); }
-        button:hover { background: var(--accent-hover); }
-        button.secondary { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
-        button.secondary:hover { background: var(--accent-light); }
-        .post { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 12px; display: grid; grid-template-columns: 150px 1fr; gap: 15px; }
-        .author-info { border-right: 1px solid var(--border); padding-right: 15px; text-align: center; }
-        .author-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-size: 32px; font-weight: bold; margin: 0 auto 10px; }
-        .author-name { font-size: 16px; font-weight: 600; color: var(--accent); }
-        .author-role { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; padding: 2px 6px; border-radius: 4px; display: inline-block; }
-        .author-posts { font-size: 12px; color: var(--text-secondary); }
-        .post-content { position: relative; }
-        .post-date { font-size: 12px; color: var(--text-muted); text-align: right; }
-        .post-title { font-size: 16px; color: var(--accent); margin-bottom: 6px; }
-        .post-text { white-space: pre-wrap; color: var(--text-secondary); line-height: 1.6; }
-        .post-actions { display: flex; gap: 10px; margin-top: 10px; align-items: center; }
-        .post-actions button { background: none; color: var(--text-muted); font-size: 14px; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-        .post-actions button:hover { color: var(--accent); }
-        .post-actions .liked { color: var(--accent); }
-        .likes { font-size: 12px; color: var(--text-muted); }
-        .replies { margin-top: 15px; padding-top: 10px; border-top: 1px solid var(--border); }
-        .reply { background: var(--bg-secondary); padding: 10px; border-radius: 6px; margin-bottom: 10px; }
-        .reply-header { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; }
-        .reply-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-size: 12px; }
-        .reply-content { color: var(--text-secondary); }
-        .post-reply-form { margin-top: 10px; }
-        .post-reply-form textarea { min-height: 60px; }
-        .topic-list { text-align: center; margin-top: 20px; }
-        .topic-list a { color: var(--accent); font-size: 14px; }
-        .topic-list a:hover { color: var(--accent-hover); }
-        .empty { text-align: center; color: var(--text-muted); padding: 20px; }
-        .loading { text-align: center; padding: 20px; color: var(--text-muted); }
-        .loading i { animation: spin 1s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @media (max-width: 800px) { .container { grid-template-columns: 1fr; } .sidebar { position: static; } .post { grid-template-columns: 1fr; } .author-info { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 15px; } }
+        :root{--bg:#0a0a10;--card:rgba(25,25,45,.96);--accent:#e91e63;--glow:#ff4081;--border:rgba(233,30,99,.3);--text:#fff;--muted:#bbb}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Noto Sans Georgian',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+        header{position:fixed;top:0;width:100%;background:rgba(15,15,35,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:1000;padding:15px 0}
+        .nav{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 25px}
+        .back{color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px;font-size:18px}
+        .back:hover{color:var(--accent)}
+        main{margin-top:90px;max-width:1100px;margin:auto;padding:20px}
+        .breadcrumb{margin-bottom:20px;color:var(--muted);font-size:14px}
+        .breadcrumb a{color:var(--accent);text-decoration:none}
+        h1{font-size:28px;margin-bottom:25px;color:var(--accent);display:flex;align-items:center;gap:12px}
+        .new-post{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:25px;margin-bottom:30px}
+        input,textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:14px;color:#fff;margin:10px 0;font-family:inherit;transition:.3s}
+        input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 20px rgba(233,30,99,.4)}
+        textarea{min-height:140px;resize:vertical}
+        .btns{display:flex;gap:12px;margin-top:15px}
+        button{padding:12px 24px;background:var(--accent);border:none;border-radius:12px;color:#fff;cursor:pointer;font-weight:600;transition:.3s}
+        button:hover{background:var(--glow);transform:translateY(-3px)}
+        button.secondary{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+        .post{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:25px;margin-bottom:20px;display:grid;grid-template-columns:160px 1fr;gap:25px}
+        .author{text-align:center}
+        .avatar{width:90px;height:90px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-size:36px;font-weight:bold;margin:0 auto 12px;box-shadow:0 0 30px var(--glow)}
+        .name{color:var(--accent);font-weight:600;font-size:18px;margin-bottom:5px}
+        .role{padding:4px 10px;background:rgba(233,30,99,.2);border-radius:8px;font-size:12px;display:inline-block}
+        .content{position:relative}
+        .date{font-size:13px;color:var(--muted);margin-bottom:10px}
+        .title{font-size:20px;margin-bottom:12px;color:var(--accent)}
+        .text{line-height:1.7;color:var(--text);white-space:pre-wrap}
+        .actions{margin-top:15px;display:flex;gap:15px;align-items:center;flex-wrap:wrap}
+        .actions button{background:none;border:none;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:6px;font-size:14px;transition:.2s}
+        .actions button:hover,.actions .liked{color:var(--accent)}
+        .replies{margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+        .reply{background:rgba(255,255,255,.03);padding:15px;border-radius:12px;margin-bottom:12px}
+        .reply-header{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin-bottom:8px}
+        .reply-avatar{width:32px;height:32px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-size:14px}
+        .empty,.loading{text-align:center;padding:50px;color:var(--muted);font-size:16px}
+        .loading i{animation:spin 1s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        @media(max-width:768px){.post{grid-template-columns:1fr}.author{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:20px}}
     </style>
 </head>
 <body>
     <header>
-        <a href="forum.html" class="logo">
-            <img src="https://raw.githubusercontent.com/OGSunny/Testerweb/main/lv_0_20251120194047.jpg" alt="Zaratic RP">
-            Zaratic RP
-        </a>
-        <a href="forum.html" class="back"><i class="fas fa-arrow-left"></i> უკან</a>
+        <div class="nav">
+            <a href="forum.html" class="back"><i class="fas fa-arrow-left"></i> უკან</a>
+            <div></div>
+        </div>
     </header>
+    <main>
+        <div class="breadcrumb"><a href="forum.html">მთავარი</a> → <span id="secName"></span></div>
+        <h1 id="title"></h1>
 
-    <div class="container">
-        <aside class="sidebar" id="sidebar"></aside>
-
-        <main class="main">
-            <div class="breadcrumb">
-                <a href="forum.html">მთავარი გვერდი</a> > ED:RP > <span id="sectionName"></span>
+        <div class="new-post" id="newPostForm">
+            <input type="text" id="postTitle" placeholder="სათაური" required>
+            <textarea id="postContent" placeholder="ტექსტი..."></textarea>
+            <div class="btns">
+                <button onclick="createPost()">გამოქვეყნება</button>
+                <button class="secondary" onclick="cancelEdit()">გაუქმება</button>
             </div>
-            <h1 id="sectionTitle"></h1>
+        </div>
 
-            <form id="postForm">
-                <input type="text" id="title" placeholder="სათაური" required>
-                <textarea id="content" placeholder="ტექსტი..." required></textarea>
-                <div class="btns">
-                    <button type="submit">გამოქვეყნება</button>
-                    <button type="button" class="secondary" onclick="cancelEdit()">გაუქმება</button>
-                </div>
-            </form>
-
-            <div id="posts" class="loading"><i class="fas fa-spinner"></i> იტვირთება...</div>
-            <div class="topic-list">
-                <a href="forum.html">თემების სიაში გადასვლა</a>
-            </div>
-        </main>
-    </div>
+        <div id="posts"></div>
+    </main>
 
     <script>
-        const WORKER_URL = 'https://data.jemalagegidze.workers.dev';
-        const SECTIONS = {
-            'rules': 'სერვერის საერთო წესები',
-            'news': 'სერვერის სიახლეები',
-            'updates': 'სერვერის განახლებები',
-            'info': 'საინფორმაციო განყოფილება',
-            'suggestions': 'წინადადებები',
-            'events': 'ივენთები',
-            'biographies': 'RP ბიოგრაფიები',
-            'complaints-admin': 'საჩივრები ადმინისტრატორზე',
-            'complaints-player': 'საჩივრები მოთამაშეზე',
-            'appeals': 'აპელაციები',
-            'unban': 'განბლოკვის მოთხოვნები',
-            'vacancies-leaders': 'ვაკანსია ლიდერზე',
-            'vacancies-admin': 'ვაკანსია ადმინისტრატორებისთვის',
-            'vacancies-partner': 'პარტნიორობა',
-            'donation-help': 'დახმარება დონატით',
-            'tech-help': 'ტექნიკური დახმარება',
-            'general': 'ზოგადი დისკუსია'
-        };
-        const LOCKED_SECTIONS = ['rules', 'news', 'updates'];
-        const ADMINS = ['Zviadi Gegidze', 'Nika Georgadze', 'Admin'];
-        const ROLES = {
-            'admin': { name: 'SERVER DEVELOPER', color: '#e91e63', bg: 'rgba(233,30,99,0.2)' },
-            'moderator': { name: 'MANAGEMENT', color: '#9c27b0', bg: 'rgba(156,39,176,0.2)' },
-            'member': { name: 'MEMBER', color: '#4caf50', bg: 'rgba(76,175,80,0.2)' }
-        };
-        const VANCANCY_SECTIONS = ['vacancies-leaders', 'vacancies-admin', 'vacancies-partner'];
-        const TEMPLATE = `
-IC შესახებ:
-- თქვენი სათამაშო სახელი და გვარი სერვერზე:
-- თქვენი ლეველი სერვერზე:
-- თქვენი სათამაშო ანგალო სერვერზე (ფრაქციები ბიზნესი გელო თა ალი შეგიძო):
-- მოწვევით 2 საათით თქვენი IC პერსონაჟის შესახებ:
+        const worker='https://data.jemalagegidze.workers.dev';
+        const user=localStorage.username;
+        if(!user) location='login.html';
+        const url=new URL(location.href);
+        const section=url.searchParams.get('id');
+        const sections={rules:"სერვერის წესები",news:"სიახლეები",updates:"განახლებები",suggestions:"წინადადებები",events:"ივენთები",biographies:"ბიოგრაფიები",'complaints-admin':"საჩივრები ადმინზე",'complaints-player':"საჩივრები მოთამაშეზე",appeals:"აპელაციები",unban:"განბლოკვა",'vacancies-leaders':"ლიდერები",'vacancies-admin':"ადმინები",'vacancies-partner':"პარტნიორები",'donation-help':"დონატი",'tech-help':"ტექ. დახმარება",general:"დისკუსია"};
+        const locked=['rules','news','updates'];
+        const admins=['Zviadi Gegidze','Nika Georgadze','Admin'];
 
-OOC შესახებ:
-- თქვენი სახელი და გვარი:
-- თქვენი ასაკი:
-- თქვენი გამოცდილება როგორც ადმინისტრატორის ან კუნიორ ადმინისტრატორის პოსტზე:
-- მოგვიყევით თქვენს შესახებ:
-- თქვენი დისქორდი:
-        `;
+        document.getElementById('title').textContent=sections[section]||section;
+        document.getElementById('secName').textContent=sections[section]||section;
+        if(locked.includes(section) && !admins.includes(user)) document.getElementById('newPostForm').style.display='none';
 
-        function checkAuth() {
-            const user = localStorage.getItem('username');
-            if (!user) {
-                location.href = 'login.html';
-                return null;
-            }
-            return user;
-        }
+        function color(name){let h=0;for(let i=0;i<name.length;i++)h=name.charCodeAt(i)+((h<<5)-h);const c=['#e91e63','#9c27b0','#673ab7','#3f51b5','#2196f3','#00bcd4','#009688','#4caf50','#ff9800','#ff5722'];return c[Math.abs(h)%c.length]}
 
-        const currentUser = checkAuth();
-        const params = new URLSearchParams(location.search);
-        const section = params.get('id');
-        const isLocked = LOCKED_SECTIONS.includes(section);
-        const isVacancy = VANCANCY_SECTIONS.includes(section);
-        const isAdminUser = ADMINS.includes(currentUser);
+        function time(t){const d=new Date(t),n=Date.now()-t;if(n<6e4)return'ახლახანს';if(n<36e5)return Math.floor(n/6e4)+' წთ';if(n<864e5)return Math.floor(n/36e5)+' სთ';if(n<6048e5)return Math.floor(n/864e5)+' დღე';return d.toLocaleDateString('ka-GE',{hour:'2-digit',minute:'2-digit'})}
 
-        document.getElementById('sectionTitle').textContent = SECTIONS[section] || section;
-        document.getElementById('sectionName').textContent = SECTIONS[section] || section;
-        if (isLocked) document.getElementById('sectionTitle').innerHTML += '<i class="fas fa-lock"></i>';
-        if (!isLocked || isAdminUser) document.getElementById('postForm').classList.add('show');
-        if (isVacancy) document.getElementById('content').value = TEMPLATE;
-
-        const sidebar = document.getElementById('sidebar');
-        Object.keys(SECTIONS).forEach(s => {
-            const a = document.createElement('a');
-            a.href = `section.html?id=${s}`;
-            a.textContent = SECTIONS[s];
-            if (s === section) a.classList.add('active');
-            sidebar.appendChild(a);
-        });
-
-        function getAvatarColor(username) {
-            const colors = ['#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50', '#ff9800', '#ff5722'];
-            let hash = 0;
-            for (let i = 0; i < username.length; i++) {
-                hash = username.charCodeAt(i) + ((hash << 5) - hash);
-            }
-            return colors[Math.abs(hash) % colors.length];
-        }
-
-        function formatDate(timestamp) {
-            const date = new Date(timestamp);
-            const now = new Date();
-            const diff = now - date;
-            if (diff < 60000) return 'ახლახანს';
-            if (diff < 3600000) return Math.floor(diff / 60000) + ' წუთის წინ';
-            if (diff < 86400000) return Math.floor(diff / 3600000) + ' საათის წინ';
-            if (diff < 604800000) return Math.floor(diff / 86400000) + ' დღის წინ';
-            return date.toLocaleDateString('ka-GE', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-        }
-
-        async function apiCall(endpoint, options = {}) {
-            try {
-                const response = await fetch(WORKER_URL + endpoint, {
-                    headers: { 'Content-Type': 'application/json' },
-                    ...options
-                });
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.error || 'შეცდომა');
-                return data;
-            } catch (error) {
-                alert(error.message);
-                throw error;
-            }
-        }
-
-        async function loadPosts() {
-            const posts = await apiCall(`/?section=${section}`);
-            posts.sort((a, b) => b.timestamp - a.timestamp);
-            const div = document.getElementById('posts');
-            if (posts.length === 0) {
-                div.innerHTML = '<div class="empty">პოსტები არ არის</div>';
-                return;
-            }
-            div.innerHTML = posts.map(p => {
-                const userRole = ADMINS.includes(p.author) ? 'admin' : 'member';
-                const role = ROLES[userRole];
-                const canEdit = p.author === currentUser || isAdminUser;
-                const likes = p.likes || [];
-                const liked = likes.includes(currentUser) ? 'liked' : '';
-                const replies = p.likes || [];
-                return `
-                    <div class="post" data-id="${p.id}" data-timestamp="${p.timestamp}">
-                        <div class="author-info">
-                            <div class="author-avatar" style="background: ${getAvatarColor(p.author)}">${p.author[0].toUpperCase()}</div>
-                            <div class="author-name"><a href="profile.html?username=${p.author}">${p.author}</a></div>
-                            <div class="author-role" style="color: ${role.color}; background: ${role.bg};">${role.name}</div>
-                            <div class="author-posts"><i class="fas fa-comment-dots"></i> პოსტები: ${p.postCount || 0}</div>
+        async function load(){
+            const posts=await fetch(`${worker}/?section=${section}`).then(r=>r.json());
+            posts.sort((a,b)=>b.timestamp-a.timestamp);
+            const container=document.getElementById('posts');
+            if(!posts.length){container.innerHTML='<div class="empty">თემები ჯერ არ არის</div>';return}
+            container.innerHTML=posts.map(p=>`
+                <div class="post">
+                    <div class="author">
+                        <div class="avatar" style="background:${color(p.author)}">${p.author[0].toUpperCase()}</div>
+                        <div class="name">${p.author}</div>
+                        <div class="role">${admins.includes(p.author)?'ადმინი':'მოთამაშე'}</div>
+                    </div>
+                    <div class="content">
+                        <div class="date">${time(p.timestamp)}${p.edited?' (რედ.)':''}</div>
+                        <div class="title">${p.title}</div>
+                        <div class="text">${p.content.replace(/\n/g,'<br>')}</div>
+                        <div class="actions">
+                            <button onclick="like('${p.id}')"><i class="fas fa-heart ${p.likes?.includes(user)?'liked':''}"></i> ${p.likes?.length||0}</button>
+                            ${p.author===user||admins.includes(user)?`<button onclick="edit('${p.id}','${p.title}','${p.content}')"><i class="fas fa-edit"></i></button><button onclick="del('${p.id}')"><i class="fas fa-trash"></i></button>`:''}
                         </div>
-                        <div class="post-content">
-                            <div class="post-date">გამოქვეყნებულია ${formatDate(p.timestamp)}${p.edited ? ` (შესწორებული ${formatDate(p.editedAt)})` : ''}</div>
-                            <div class="post-title">${p.title}</div>
-                            <div class="post-text">${p.content.replace(/\n/g, '<br>')}</div>
-                            <div class="post-actions">
-                                <button onclick="likePost('${p.id}')"><i class="fas fa-heart ${liked}"></i> <span class="likes">${likes.length}</span></button>
-                                <button><i class="fas fa-quote-left"></i> ციტატა</button>
-                                ${canEdit ? `<button onclick="editPost('${p.id}', '${p.title.replace(/'/g, "\\'")}', '${p.content.replace(/'/g, "\\'")}')"><i class="fas fa-edit"></i></button>` : ''}
-                                ${canEdit ? `<button onclick="deletePost('${p.id}')"><i class="fas fa-trash"></i></button>` : ''}
-                            </div>
-                            <div class="replies">
-                                ${replies.map(r => `
-                                    <div class="reply">
-                                        <div class="reply-header">
-                                            <div class="reply-avatar" style="background: ${getAvatarColor(r.author)}">${r.author[0].toUpperCase()}</div>
-                                            ${r.author} - ${formatDate(r.timestamp)}
-                                        </div>
-                                        <div class="reply-content">${r.content.replace(/\n/g, '<br>')}</div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                            <div class="post-reply-form">
-                                <textarea placeholder="პასუხი..."></textarea>
-                                <button onclick="addReplyToPost('${p.id}', this.previousElementSibling.value)">გაგზავნა</button>
-                            </div>
+                        <div class="replies">
+                            ${(p.replies||[]).map(r=>`
+                                <div class="reply">
+                                    <div class="reply-header"><div class="reply-avatar" style="background:${color(r.author)}">${r.author[0]}</div>${r.author} • ${time(r.timestamp)}</div>
+                                    <div>${r.content.replace(/\n/g,'<br>')}</div>
+                                </div>`).join('')}
+                            <textarea placeholder="პასუხი..." id="reply-${p.id}"></textarea>
+                            <button onclick="reply('${p.id}')">გაგზავნა</button>
                         </div>
                     </div>
-                `;
-            }).join('');
+                </div>`).join('');
         }
 
-        document.getElementById('postForm').onsubmit = async e => {
-            e.preventDefault();
-            const title = document.getElementById('title').value.trim();
-            const content = document.getElementById('content').value.trim();
-            if (!title || !content) return alert('შეავსეთ ყველა ველი');
-            await apiCall('/', {
-                method: 'POST',
-                body: JSON.stringify({ action: 'create', section, post: { author: currentUser, title, content } })
-            });
-            document.getElementById('postForm').reset();
-            if (isVacancy) document.getElementById('content').value = TEMPLATE;
-            loadPosts();
-        };
-
-        window.editPost = (id, t, c) => {
-            document.getElementById('title').value = t;
-            document.getElementById('content').value = c;
-            const form = document.getElementById('postForm');
-            const originalSubmit = form.onsubmit;
-            form.onsubmit = async e => {
-                e.preventDefault();
-                const newTitle = document.getElementById('title').value.trim();
-                const newContent = document.getElementById('content').value.trim();
-                await apiCall('/', {
-                    method: 'POST',
-                    body: JSON.stringify({ action: 'edit', section, id, title: newTitle, content: newContent, requestingUser: currentUser })
-                });
-                form.reset();
-                if (isVacancy) document.getElementById('content').value = TEMPLATE;
-                form.onsubmit = originalSubmit;
-                loadPosts();
-            };
-        };
-
-        window.deletePost = async id => {
-            if (!confirm('წაშლა?')) return;
-            await apiCall('/', {
-                method: 'POST',
-                body: JSON.stringify({ action: 'delete', section, id, requestingUser: currentUser })
-            });
-            loadPosts();
-        };
-
-        window.likePost = async id => {
-            await apiCall('/', {
-                method: 'POST',
-                body: JSON.stringify({ action: 'like', section, id, username: currentUser })
-            });
-            loadPosts();
-        };
-
-        window.addReplyToPost = async (id, content) => {
-            if (!content.trim()) return alert('შეიყვანეთ პასუხი');
-            await apiCall('/', {
-                method: 'POST',
-                body: JSON.stringify({ action: 'reply', section, id, replyAuthor: currentUser, replyContent: content })
-            });
-            loadPosts();
-        };
-
-        function cancelEdit() {
-            const form = document.getElementById('postForm');
-            form.reset();
-            if (isVacancy) document.getElementById('content').value = TEMPLATE;
-            form.onsubmit = document.getElementById('postForm').onsubmit;
+        async function createPost(){
+            const t=document.getElementById('postTitle').value.trim();
+            const c=document.getElementById('postContent').value.trim();
+            if(!t||!c) return alert('შეავსეთ ველები');
+            await fetch(worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'create',section,post:{author:user,title:t,content:c}})});
+            document.getElementById('postTitle').value='';document.getElementById('postContent').value='';load();
         }
 
-        loadPosts();
-        setInterval(loadPosts, 15000);
+        window.edit=(id,t,c)=>{document.getElementById('postTitle').value=t;document.getElementById('postContent').value=c;
+            window.currentEdit=id;document.querySelector('.btns button').onclick=async()=>{await fetch(worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'edit',section,id,title:document.getElementById('postTitle').value,content:document.getElementById('postContent').value,requestingUser:user})});load();cancelEdit();}
+        };
+        window.cancelEdit=()=>{document.getElementById('postTitle').value='';document.getElementById('postContent').value='';window.currentEdit=null;document.querySelector('.btns button').onclick=createPost};
+        window.del=async id=>{if(confirm('წაშლა?')){await fetch(worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'delete',section,id,requestingUser:user})});load()}}
+        window.like=async id=>{await fetch(worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'like',section,id,username:user})});load()}
+        window.reply=async id=>{const txt=document.getElementById('reply-'+id).value.trim();if(!txt)return;await fetch(worker,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'reply',section,id,replyAuthor:user,replyContent:txt})});document.getElementById('reply-'+id).value='';load()}
+
+        load();setInterval(load,20000);
     </script>
 </body>
 </html>
